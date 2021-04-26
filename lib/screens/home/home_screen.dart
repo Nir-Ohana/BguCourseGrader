@@ -1,13 +1,16 @@
+import 'package:bgu_course_grader/models/appBar.dart';
 import 'package:flutter/material.dart';
 import 'package:bgu_course_grader/screens/menu/menu_screen.dart';
-import 'file:///D:/android_studio/flutter_mini_project/lib/models/appBar.dart';
+
 
 class HomeScreen extends StatelessWidget {
   // might need to convert to statful
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar,
+      resizeToAvoidBottomInset: false,
+      backgroundColor: Colors.orange[100],
+      appBar: MyAppBar(),
       body: Padding(
         padding: EdgeInsets.fromLTRB(30.0, 40.0, 30.0, 0),
         child: Directionality(
@@ -37,10 +40,10 @@ class HomeScreen extends StatelessWidget {
               Text(
                 'בניאל בן אנדרה',
                 style: TextStyle(
-                  color: Colors.amberAccent[200],
+                  color: Colors.purpleAccent[800],
                   letterSpacing: 2.0,
-                  fontSize: 28.0,
-                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                  fontWeight: FontWeight.normal,
                 ),
               ),
               SizedBox(
@@ -59,10 +62,10 @@ class HomeScreen extends StatelessWidget {
               Text(
                 'מדעי הדשא',
                 style: TextStyle(
-                  color: Colors.amberAccent[200],
+                  color: Colors.purpleAccent[800],
                   letterSpacing: 2.0,
-                  fontSize: 28.0,
-                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                  fontWeight: FontWeight.normal,
                 ),
               ),
               SizedBox(
@@ -81,10 +84,10 @@ class HomeScreen extends StatelessWidget {
               Text(
                 'פלוגת איזי',
                 style: TextStyle(
-                  color: Colors.amberAccent[200],
+                  color: Colors.purpleAccent[800],
                   letterSpacing: 2.0,
-                  fontSize: 28.0,
-                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                  fontWeight: FontWeight.normal,
                 ),
               ),
               Padding(
@@ -93,11 +96,18 @@ class HomeScreen extends StatelessWidget {
                   child: SizedBox(
                     width: 200,
                     child: ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor:  MaterialStateProperty.all<Color>(Colors.orange[800]),
+                      ),
                       onPressed: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) => Menu()));
                       },
-                      child: Text('לתפריט'),
+                      child: Text('לתפריט',
+                      style: TextStyle(
+                        color: Colors.black
+                      ),
+                      ),
                     ),
                   ),
                 ),
@@ -109,3 +119,5 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+
+
