@@ -1,5 +1,8 @@
+import 'package:bgu_course_grader/authentication/auth_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:bgu_course_grader/screens/settings/settings_main.dart';
+import 'package:provider/provider.dart';
+
 
 
 
@@ -12,6 +15,7 @@ import 'package:bgu_course_grader/screens/settings/settings_main.dart';
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
+    final authBloc = Provider.of<AuthBloc>(context);
     return AppBar(
         backgroundColor: Colors.orange[800],
       title: Padding(
@@ -25,7 +29,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
               style: ButtonStyle(
                 backgroundColor:  MaterialStateProperty.all<Color>(Colors.orange[800]),
               ),
-              onPressed: (){},
+              onPressed: () => authBloc.logout(),
               icon: Icon(Icons.person),
               label: Text('התנתקות')
           ),

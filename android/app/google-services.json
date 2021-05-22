@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "297201990080",
+    "project_id": "bgu-course-grader",
+    "storage_bucket": "bgu-course-grader.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:297201990080:android:0c1c006cc42997a3467025",
+        "android_client_info": {
+          "package_name": "com.example.bgu_course_grader"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "297201990080-mrq7n2iilcoap1dgfbp87a2ngu01clkc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bgu_course_grader",
+            "certificate_hash": "679ede686208161eb0492a7b1b29435e128bb39f"
+          }
+        },
+        {
+          "client_id": "297201990080-l5i4rdp33nhc3cj4j4h0u56u3drjd89o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnzaZ3IELbC3OE0K2ObyTZjhu4k3zXWuc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "297201990080-l5i4rdp33nhc3cj4j4h0u56u3drjd89o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
