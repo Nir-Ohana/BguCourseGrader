@@ -31,8 +31,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void dispose(){
-    loginStateSubscription.cancel();
-    super.dispose();
+      loginStateSubscription.cancel();
+      super.dispose();
   }
 
   @override

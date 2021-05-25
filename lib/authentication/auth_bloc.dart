@@ -20,7 +20,7 @@ class AuthBloc{
 
       //Firebase sign in
       final result = await authService.signInWithCredential(credential);
-      print('${result.user.displayName}');
+      print('user logged in: ${result.user.displayName}');
     }
 
     catch(error){

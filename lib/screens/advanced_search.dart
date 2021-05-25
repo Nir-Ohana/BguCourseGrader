@@ -1,5 +1,6 @@
 import 'package:bgu_course_grader/models/appBar.dart';
 import 'package:bgu_course_grader/models/inputDec.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AdvancedSearch extends StatefulWidget {
@@ -10,7 +11,9 @@ class AdvancedSearch extends StatefulWidget {
 class _AdvancedSearchState extends State<AdvancedSearch> {
   // fields for DB
   String faculty = '';
-  String lecturer = '';
+  //String lecturer = '';
+  String courseName = '';
+  String courseNum = '';
   bool midterm = false;
   bool finalExam = false;
   bool assignments = false;
@@ -73,12 +76,12 @@ class _AdvancedSearchState extends State<AdvancedSearch> {
                     TextFormField(
                       decoration: textInputDecoration.copyWith(
                           hintText:
-                              'קורס'), // faculty box, need to add autocomplete or drag down
+                              'שם קורס'), // faculty box, need to add autocomplete or drag down
                       // validator: (val) =>
                       // val.isEmpty ? 'Please enter an email' : null,
                       onChanged: (val) {
                         setState(() {
-                          faculty = val;
+                          courseName = val;
                         });
                       },
                     ),
@@ -88,12 +91,12 @@ class _AdvancedSearchState extends State<AdvancedSearch> {
                     TextFormField(
                       decoration: textInputDecoration.copyWith(
                           hintText:
-                              'מרצה'), // faculty box, need to add autocomplete or drag down
+                              'מספר קורס'), // faculty box, need to add autocomplete or drag down
                       // validator: (val) =>
                       // val.isEmpty ? 'Please enter an email' : null,
                       onChanged: (val) {
                         setState(() {
-                          lecturer = val;
+                          courseNum = val;
                         });
                       },
                     ),
@@ -145,7 +148,23 @@ class _AdvancedSearchState extends State<AdvancedSearch> {
                         print(attendance);
                       },
                     ),
-                    Text('דירוג קורס: (בעתיד יהיו כוכבים לפי הדירוגת 1-5)')
+                    Text('דירוג קורס: (בעתיד יהיו כוכבים לפי הדירוגת 1-5)'),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0,100, 0, 0),
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor:  MaterialStateProperty.all<Color>(Colors.orange[800]),
+                        ),
+                        onPressed: () async {
+
+                        },
+                        child: Text('חפש',
+                          style: TextStyle(
+                              color: Colors.black
+                          ),
+                        ),
+                      ),
+                    )
                   ],
                 )),
           ),
