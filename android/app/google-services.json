@@ -14,6 +14,30 @@
       },
       "oauth_client": [
         {
+          "client_id": "297201990080-54mo632h062c317ak918kg186c7hg6q5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bgu_course_grader",
+            "certificate_hash": "256fcb9c847faad79b4cbed5a94b092ea400de22"
+          }
+        },
+        {
+          "client_id": "297201990080-ci68c3t99ibm8om4r87h7mo5r1tdlha1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bgu_course_grader",
+            "certificate_hash": "b5f6c5304e93c4cd378fed8ab1a7059b580a54fc"
+          }
+        },
+        {
+          "client_id": "297201990080-hepbc57f532o81m7gvv2fto13ui8kc3b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bgu_course_grader",
+            "certificate_hash": "d1c7c1e2c043e6fabdfa481ecac7e317d4065b61"
+          }
+        },
+        {
           "client_id": "297201990080-mrq7n2iilcoap1dgfbp87a2ngu01clkc.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
