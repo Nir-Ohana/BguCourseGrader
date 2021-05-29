@@ -1,4 +1,4 @@
-import 'package:bgu_course_grader/authentication/auth_bloc.dart';
+import 'package:bgu_course_grader/provider/google_sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:bgu_course_grader/screens/settings/settings_main.dart';
 import 'package:provider/provider.dart';
@@ -23,7 +23,6 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
       });
     }
 
-    final authBloc = Provider.of<AuthBloc>(context);
     return AppBar(
         backgroundColor: Colors.orange[800],
       title: Padding(
@@ -37,7 +36,11 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
               style: ButtonStyle(
                 backgroundColor:  MaterialStateProperty.all<Color>(Colors.orange[800]),
               ),
-              onPressed: () => authBloc.logout(),
+              onPressed: () {
+                final provider = Provider.of<GoogleSignInProvider>(
+                    context, listen: false);
+                provider.logout();
+              },
               icon: Icon(Icons.person),
               label: Text('התנתקות')
           ),
@@ -120,8 +123,7 @@ class _SettingsFormState extends State<SettingsForm> {
             divisions: 8,
             onChanged: (val) => setState(() => _currentStrength = val.round()),
           ),
-          RaisedButton(
-              color: Colors.pink[400],
+          ElevatedButton(
               child: Text(
                 'Update',
                 style: TextStyle(color: Colors.white),
