@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.bgu_course_grader">
    <application
-        android:label="bgu_course_grader"
+        android:label="BGU Course Grader"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
