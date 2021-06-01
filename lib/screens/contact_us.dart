@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bgu_course_grader/screens/menu/menu_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -87,6 +89,14 @@ class MyCustomFormState extends State<MyCustomForm> {
             padding: const EdgeInsets.only(left: 150.0, top: 40.0),
             child: new ElevatedButton(
                 onPressed: () {
+                  firestore_instance
+                      .collection('courses')
+                      .get()
+                      .then((value) => {
+                            value.docs.forEach((element) {
+                              log(element.data().toString());
+                            })
+                          });
                   FocusScope.of(context).unfocus();
                   // Validate returns true if the form is valid, or false otherwise.
                   if (_formKey.currentState.validate()) {
@@ -102,9 +112,13 @@ class MyCustomFormState extends State<MyCustomForm> {
                           'message': messageController.text
                         })
                         .then((_) => ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Thank you for your feedback !'))))
-                        .catchError((_) =>ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Ya Walli, we have a problem.'))));
+                            SnackBar(
+                                content:
+                                    Text('Thank you for your feedback !'))))
+                        .catchError((_) => ScaffoldMessenger.of(context)
+                            .showSnackBar(SnackBar(
+                                content:
+                                    Text('Ya Walli, we have a problem.'))));
 
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => Menu()));
