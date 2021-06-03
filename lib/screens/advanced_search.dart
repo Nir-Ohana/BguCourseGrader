@@ -150,7 +150,7 @@ class _AdvancedSearchState extends State<AdvancedSearch> {
                     ),
                     Text('דירוג קורס: (בעתיד יהיו כוכבים לפי הדירוגת 1-5)'),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(0,100, 0, 0),
+                      padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                       child: ElevatedButton(
                         style: ButtonStyle(
                           backgroundColor:  MaterialStateProperty.all<Color>(Colors.orange[800]),
