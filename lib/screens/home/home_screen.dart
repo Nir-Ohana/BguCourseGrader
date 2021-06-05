@@ -1,4 +1,5 @@
 import 'package:bgu_course_grader/models/appBar.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:bgu_course_grader/screens/menu/menu_screen.dart';
@@ -13,6 +14,15 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser;
+    final FirebaseFirestore firestore_instance = FirebaseFirestore.instance;
+    var fields;
+    getData() async {
+      return await firestore_instance.collection("Users").doc(user.displayName).get();
+    }
+    getData().then((val){
+    fields = val.data();
+    });
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.orange[100],
@@ -64,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 10.0,
                 ),
                 Text(
-                  'מדעי הדשא',
+                  fields!=null? fields('faculty').toString() : 'מדעי הדשא' ,
                   style: TextStyle(
                     color: Colors.purpleAccent[800],
                     letterSpacing: 2.0,
@@ -86,7 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 10.0,
                 ),
                 Text(
-                  'פלוגת איזי',
+                  fields!=null? fields('department').toString() : 'פלוגת איזי',
                   style: TextStyle(
                     color: Colors.purpleAccent[800],
                     letterSpacing: 2.0,

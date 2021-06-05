@@ -1,4 +1,5 @@
 import 'package:bgu_course_grader/provider/google_sign_in.dart';
+import 'package:bgu_course_grader/screens/menu/menu_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:bgu_course_grader/screens/settings/settings_main.dart';
 import 'package:provider/provider.dart';
@@ -29,6 +30,11 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
         padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
 
       ),
+      leading: BackButton(
+        color: Colors.white,
+        onPressed: (){Navigator.canPop(context)? Navigator.of(context).pop(): Navigator.push(context,
+            MaterialPageRoute(builder: (context) => Menu()));},
+      ),
       actions: [
         Directionality(
           textDirection: TextDirection.rtl,
@@ -51,9 +57,11 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
               style: ButtonStyle(
                 backgroundColor:  MaterialStateProperty.all<Color>(Colors.orange[800]),
               ),
-              onPressed:  () => Scaffold(
-                drawer: SettingsMenu()
-              ),
+              onPressed:  (){ Navigator.push(context,
+    MaterialPageRoute(builder: (context) => SettingsMenu()));},
+              // Scaffold(
+              //   drawer: SettingsMenu()
+              // ),
               icon: Icon(Icons.settings),
               label: Text('הגדרות')
           ),

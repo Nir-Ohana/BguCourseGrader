@@ -1,4 +1,5 @@
 import 'package:bgu_course_grader/models/appBar.dart';
+import 'package:bgu_course_grader/screens/settings/settings_main.dart';
 import 'package:flutter/material.dart';
 import 'menu_choice_list.dart';
 import 'package:bgu_course_grader/screens/prefered_courses.dart';
@@ -18,7 +19,8 @@ class Menu extends StatelessWidget {
       () => Navigator.push(context, MaterialPageRoute(builder: (context) => AdvancedSearch())),
       () => Navigator.push(context, MaterialPageRoute(builder: (context) =>MyReviews())),
       () => Navigator.push(context, MaterialPageRoute(builder: (context) => CourseList(filtered: false))),
-      () => Navigator.push(context, MaterialPageRoute(builder: (context) => ContactUs()))
+      () => Navigator.push(context, MaterialPageRoute(builder: (context) => ContactUs())),
+      () => Navigator.push(context, MaterialPageRoute(builder: (context) => SettingsMenu()))
     ];
     targets[index].call();
   }
