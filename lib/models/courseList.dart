@@ -52,7 +52,7 @@ class _CoursesListState extends State<CoursesList> {
               final courseData = (course.data() as Map<String, dynamic>);
               final courseName = courseData['course_name'];
               final courseNum = courseData['course_number'];
-              final courseCredit = courseData['course_credit'];
+              final courseCredit = courseData['credit_point'];
               final courseDepName = courseData['department_name'];
               final courseTest = courseData['test_exists'];
               final Course courseToBuild = Course(name: courseName,
@@ -62,9 +62,7 @@ class _CoursesListState extends State<CoursesList> {
               coursesList.add(courseWidget);
             }
           } else {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
+            return Loading();
           }
           return ListView(
               children: coursesList,

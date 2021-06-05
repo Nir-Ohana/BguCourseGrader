@@ -10,7 +10,7 @@ class AdvancedSearch extends StatefulWidget {
 
 class _AdvancedSearchState extends State<AdvancedSearch> {
   // fields for DB
-  String faculty = '';
+  String department = '';
   //String lecturer = '';
   String courseName = '';
   String courseNum = '';
@@ -46,27 +46,12 @@ class _AdvancedSearchState extends State<AdvancedSearch> {
                     TextFormField(
                       decoration: textInputDecoration.copyWith(
                           hintText:
-                              'פקולטה'), // faculty box, need to add autocomplete or drag down
-                      // validator: (val) =>
-                      // val.isEmpty ? 'Please enter an email' : null,
-                      onChanged: (val) {
-                        setState(() {
-                          faculty = val;
-                        });
-                      },
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    TextFormField(
-                      decoration: textInputDecoration.copyWith(
-                          hintText:
                               'מחלקה'), // faculty box, need to add autocomplete or drag down
                       // validator: (val) =>
                       // val.isEmpty ? 'Please enter an email' : null,
                       onChanged: (val) {
                         setState(() {
-                          faculty = val;
+                          department = val;
                         });
                       },
                     ),
@@ -96,20 +81,10 @@ class _AdvancedSearchState extends State<AdvancedSearch> {
                       // val.isEmpty ? 'Please enter an email' : null,
                       onChanged: (val) {
                         setState(() {
+
                           courseNum = val;
+
                         });
-                      },
-                    ),
-                    CheckboxListTile(
-                      value: midterm,
-                      title: Text('ללא בוחן אמצע'),
-                      secondary: Icon(Icons.fact_check),
-                      controlAffinity: ListTileControlAffinity.trailing,
-                      onChanged: (bool value) {
-                        setState(() {
-                          midterm = value;
-                        });
-                        print(midterm);
                       },
                     ),
                     CheckboxListTile(
@@ -121,31 +96,7 @@ class _AdvancedSearchState extends State<AdvancedSearch> {
                         setState(() {
                           finalExam = value;
                         });
-                        print(finalExam);
-                      },
-                    ),
-                    CheckboxListTile(
-                      value: assignments,
-                      title: Text('ללא עבודות'),
-                      secondary: Icon(Icons.assignment),
-                      controlAffinity: ListTileControlAffinity.trailing,
-                      onChanged: (bool value) {
-                        setState(() {
-                          assignments = value;
-                        });
-                        print(assignments);
-                      },
-                    ),
-                    CheckboxListTile(
-                      value: attendance,
-                      title: Text('ללא נוכחות חובה'),
-                      secondary: Icon(Icons.airline_seat_individual_suite),
-                      controlAffinity: ListTileControlAffinity.trailing,
-                      onChanged: (bool value) {
-                        setState(() {
-                          attendance = value;
-                        });
-                        print(attendance);
+
                       },
                     ),
                     Text('דירוג קורס: (בעתיד יהיו כוכבים לפי הדירוגת 1-5)'),
@@ -156,6 +107,10 @@ class _AdvancedSearchState extends State<AdvancedSearch> {
                           backgroundColor:  MaterialStateProperty.all<Color>(Colors.orange[800]),
                         ),
                         onPressed: () async {
+                          print(department);
+                          print(courseName);
+                          print(courseNum);
+                          print(finalExam);
 
                         },
                         child: Text('חפש',
