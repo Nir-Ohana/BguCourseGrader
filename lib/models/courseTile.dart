@@ -14,8 +14,8 @@ class CourseTile extends StatelessWidget {
       child: Card(
         margin: EdgeInsets.fromLTRB(20, 6, 20, 0),
         child: ListTile(
-          title: Text(course.name),
-          subtitle: Text('${course.courseNumber}    ${course.openIn}'),
+          title: Text('${course.name}       ${course.courseNumber}'),
+          subtitle: Text('${course.credits}    ${course.test}   ${course.depName}'),
         ),
       ),
     );

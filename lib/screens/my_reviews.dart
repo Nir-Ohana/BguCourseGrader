@@ -31,18 +31,18 @@ class _MyReviewsState extends State<MyReviews> {
     getCurrentUser();
   }
 
-  List<Container> sup2 = [];
 
-  void reviewsStream() async {
-    await for (var snapshot in _firestore
-        .collection('Reviews')
-        .where('email', isEqualTo: loggedInUser.email)
-        .snapshots()) {
-      for (var review in snapshot.docs) {
-        print(review.data());
-      }
-    }
-  }
+
+  // void reviewsStream() async {
+  //   await for (var snapshot in _firestore
+  //       .collection('Reviews')
+  //       .where('email', isEqualTo: loggedInUser.email)
+  //       .snapshots()) {
+  //     for (var review in snapshot.docs) {
+  //       print(review.data());
+  //     }
+  //   }
+  // }
   // void getReviews() async{
   //   print(loggedInUser.email);
   //   final userReviews = await _firestore.collection('Reviews').where('email', isEqualTo: loggedInUser.email).get();

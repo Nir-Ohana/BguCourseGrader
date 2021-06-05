@@ -1,7 +1,10 @@
 class Course {
   final String name;
   final String courseNumber;
-  final String openIn;
+  final String credits;
+  final String depName;
+  final bool test;
 
-  Course({this.name, this.courseNumber, this.openIn});
+  Course({this.name, this.courseNumber,
+    this.credits, this. depName, this.test});
 }
