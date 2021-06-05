@@ -17,7 +17,7 @@ class Menu extends StatelessWidget {
       () => Navigator.push(context, MaterialPageRoute(builder: (context) => PrefferedCourses())),
       () => Navigator.push(context, MaterialPageRoute(builder: (context) => AdvancedSearch())),
       () => Navigator.push(context, MaterialPageRoute(builder: (context) =>MyReviews())),
-      () => Navigator.push(context, MaterialPageRoute(builder: (context) => CourseList())),
+      () => Navigator.push(context, MaterialPageRoute(builder: (context) => CourseList(filtered: false))),
       () => Navigator.push(context, MaterialPageRoute(builder: (context) => ContactUs()))
     ];
     targets[index].call();

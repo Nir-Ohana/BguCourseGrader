@@ -9,6 +9,20 @@ import 'package:bgu_course_grader/models/course.dart';
 
 
 class CourseList extends StatefulWidget {
+  final filtered;
+  final department;
+  final courseName;
+  final courseNum;
+  final finalExam;
+
+
+
+
+  CourseList({this.filtered, this.department, this.courseNum, this.courseName, this.finalExam});
+
+
+
+
   @override
   _CourseListState createState() => _CourseListState();
 }
@@ -23,7 +37,9 @@ class _CourseListState extends State<CourseList> {
       body: Directionality(
         textDirection: TextDirection.rtl,
         child: Container(
-          child: CoursesList(),
+          child: CoursesList(filtered: widget.filtered,dep: widget.department,
+          courseName: widget.courseName, courseNum: widget.courseNum,
+          hasTest: !widget.finalExam),
         ),
       ),
 

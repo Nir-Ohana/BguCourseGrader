@@ -9,11 +9,21 @@ import 'package:bgu_course_grader/screens/loading.dart';
 import 'package:bgu_course_grader/models/courseTile.dart';
 
 class CoursesList extends StatefulWidget {
+  final filtered;
+  final dep;
+  final courseName;
+  final courseNum;
+  final hasTest;
+  CoursesList({this.filtered, this.dep, this.courseName,
+  this.courseNum, this.hasTest});
+
+
   @override
   _CoursesListState createState() => _CoursesListState();
 }
 
 class _CoursesListState extends State<CoursesList> {
+
 
   final _firestore = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
@@ -35,15 +45,38 @@ class _CoursesListState extends State<CoursesList> {
     getCurrentUser();
   }
 
+  Stream returnAll(){
+    return _firestore
+        .collection('courses').snapshots();
+  }
 
+  Stream returnFiltered(){
+    Query collection = _firestore
+        .collection('courses');
+
+    if (widget.dep != ''){
+      collection = collection.where('department_name', isEqualTo: widget.dep);
+    }
+    if (widget.courseName != ''){
+      print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~${widget.courseName}');
+      collection = collection.where('course_name', isGreaterThanOrEqualTo: widget.courseName).where('course_name', isLessThan: 'z' + widget.courseName ); //TODO fix this
+    }
+    if(widget.courseNum != ''){
+      collection = collection.where('course_number', isEqualTo: widget.courseNum);
+    }
+    if(!widget.hasTest){
+      collection = collection.where('test_exists', isEqualTo: widget.hasTest);
+    }
+
+      return collection.snapshots();
+  }
 
 
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-        stream: _firestore
-            .collection('courses').snapshots(),
+        stream: !widget.filtered ? returnAll() : returnFiltered(),
           builder: (context, snapshot) {
           List<CourseTile> coursesList = [];
           if (snapshot.hasData) {

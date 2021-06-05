@@ -3,6 +3,8 @@ import 'package:bgu_course_grader/models/inputDec.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'courses_list.dart';
+
 class AdvancedSearch extends StatefulWidget {
   @override
   _AdvancedSearchState createState() => _AdvancedSearchState();
@@ -107,11 +109,10 @@ class _AdvancedSearchState extends State<AdvancedSearch> {
                           backgroundColor:  MaterialStateProperty.all<Color>(Colors.orange[800]),
                         ),
                         onPressed: () async {
-                          print(department);
-                          print(courseName);
-                          print(courseNum);
-                          print(finalExam);
 
+                          Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                              CourseList(filtered: true, department: department,
+                                courseNum: courseNum, courseName: courseName, finalExam: finalExam,)));
                         },
                         child: Text('חפש',
                           style: TextStyle(
