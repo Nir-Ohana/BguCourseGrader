@@ -66,10 +66,8 @@ class _CoursesListState extends State<CoursesList> {
               child: CircularProgressIndicator(),
             );
           }
-          return Expanded(
-            child: ListView(
+          return ListView(
               children: coursesList,
-            ),
           );
         });
   }
