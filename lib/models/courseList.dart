@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import 'package:provider/provider.dart';
 import 'package:bgu_course_grader/screens/loading.dart';
 import 'package:bgu_course_grader/models/courseTile.dart';
 
@@ -59,7 +58,7 @@ class _CoursesListState extends State<CoursesList> {
     }
     if (widget.courseName != ''){
       print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~${widget.courseName}');
-      collection = collection.where('course_name', isGreaterThanOrEqualTo: widget.courseName).where('course_name', isLessThan: 'z' + widget.courseName ); //TODO fix this
+      collection = collection.where('course_name', isGreaterThanOrEqualTo: widget.courseName).where('course_name', isLessThan: widget.courseName + 'z' ); //TODO fix this
     }
     if(widget.courseNum != ''){
       collection = collection.where('course_number', isEqualTo: widget.courseNum);
@@ -88,9 +87,10 @@ class _CoursesListState extends State<CoursesList> {
               final courseCredit = courseData['credit_point'];
               final courseDepName = courseData['department_name'];
               final courseTest = courseData['test_exists'];
+              final courseSummary = courseData['course_summary'];
               final Course courseToBuild = Course(name: courseName,
               courseNumber: courseNum, credits: courseCredit, depName: courseDepName,
-              test: courseTest);
+              test: courseTest, courseSummary: courseSummary);
               final courseWidget = CourseTile(course: courseToBuild,);
               coursesList.add(courseWidget);
             }

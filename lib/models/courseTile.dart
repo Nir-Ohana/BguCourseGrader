@@ -34,6 +34,7 @@ class CourseTile extends StatelessWidget {
                           course_name: course.name,
                           course_number: course.courseNumber,
                           credit_point: course.credits,
+                          course_summary: course.courseSummary,
                         )));
           },
         ),
