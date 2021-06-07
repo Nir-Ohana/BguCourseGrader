@@ -2,9 +2,17 @@ import 'package:bgu_course_grader/screens/course_page.dart';
 import 'package:flutter/material.dart';
 import 'package:bgu_course_grader/models/course.dart';
 
-class CourseTile extends StatelessWidget {
+class CourseTile extends StatefulWidget {
   final Course course;
-  CourseTile({this.course});
+  bool favorite;
+  CourseTile({this.course, this.favorite});
+
+  @override
+  _CourseTileState createState() => _CourseTileState();
+}
+
+class _CourseTileState extends State<CourseTile> {
+
 
   @override
   Widget build(BuildContext context) {
@@ -14,27 +22,32 @@ class CourseTile extends StatelessWidget {
         margin: EdgeInsets.fromLTRB(20, 6, 20, 0),
         child: ListTile(
           title: Text(
-            '${course.name}\n',
+            '${widget.course.name}\n',
             textDirection: TextDirection.rtl,
           ),
           subtitle:
-              // ${course.test}   ${course.depName}
-              // (course.test ? 'קיים מבחן: כן' : 'קיים מבחן: לא') //TODO: enter in a separate page
-              //'נק"ז: ${course.credits}'
               Text(
-            'מספר קורס: ${course.courseNumber}',
+            'מספר קורס: ${widget.course.courseNumber}',
             textDirection: TextDirection.rtl,
           ),
+          trailing: Icon(widget.favorite ?
+              Icons.favorite : Icons.favorite_border,
+          color: Colors.red,),
           tileColor: Colors.orange[400],
-          onTap: () {
+          onTap: (){
+            setState(() {
+              widget.favorite = !widget.favorite;
+            });
+            },
+          onLongPress: () {
             Navigator.push(
                 context,
                 MaterialPageRoute(
                     builder: (context) => CoursePage(
-                          course_name: course.name,
-                          course_number: course.courseNumber,
-                          credit_point: course.credits,
-                          course_summary: course.courseSummary,
+                          course_name: widget.course.name,
+                          course_number: widget.course.courseNumber,
+                          credit_point: widget.course.credits,
+                          course_summary: widget.course.courseSummary,
                         )));
           },
         ),

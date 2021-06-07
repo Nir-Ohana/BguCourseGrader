@@ -80,8 +80,15 @@ class _CoursesListState extends State<CoursesList> {
     return _firestore
         .collection('Favorites').snapshots();
   }
-
-
+  //
+  // Future<bool> isInFavorites(String courseName) async {
+  //   bool exists = await _firestore.collection('Favorites').doc(loggedInUser.email).get().then(
+  //           (value) {
+  //         final docData = (value.data()['liked'] as List<dynamic>);
+  //         return docData.contains(courseName);
+  //       });
+  //   return exists;
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -102,7 +109,7 @@ class _CoursesListState extends State<CoursesList> {
               final Course courseToBuild = Course(name: courseName,
               courseNumber: courseNum, credits: courseCredit, depName: courseDepName,
               test: courseTest, courseSummary: courseSummary);
-              final courseWidget = CourseTile(course: courseToBuild,);
+              final courseWidget = CourseTile(course: courseToBuild, favorite: false,);
               coursesList.add(courseWidget);
             }
           } else {
