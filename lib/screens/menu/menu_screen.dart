@@ -15,7 +15,6 @@ class Menu extends StatelessWidget {
 
     List<Function> targets= [
           () => Navigator.push(context, MaterialPageRoute(builder: (context) =>CourseList(favorites: true ,filtered: false, finalExam: false,))),
-          () => Navigator.push(context, MaterialPageRoute(builder: (context) =>CourseList(favorites: true, filtered: false, finalExam: false,))),
           () => Navigator.push(context, MaterialPageRoute(builder: (context) => AdvancedSearch())),
           () => Navigator.push(context, MaterialPageRoute(builder: (context) =>MyReviews())),
           () => Navigator.push(context, MaterialPageRoute(builder: (context) => CourseList(favorites: false ,filtered: false, finalExam: false,))),
