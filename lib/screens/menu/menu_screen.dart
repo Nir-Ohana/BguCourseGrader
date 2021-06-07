@@ -14,10 +14,10 @@ class Menu extends StatelessWidget {
  void _navigator(int index, BuildContext context){
 
     List<Function> targets= [
-      () => Navigator.push(context, MaterialPageRoute(builder: (context) =>CourseList( filtered: false, finalExam: false,))),
+      () => Navigator.push(context, MaterialPageRoute(builder: (context) =>CourseList(favorites: true, filtered: false, finalExam: false,))),
       () => Navigator.push(context, MaterialPageRoute(builder: (context) => AdvancedSearch())),
       () => Navigator.push(context, MaterialPageRoute(builder: (context) =>MyReviews())),
-      () => Navigator.push(context, MaterialPageRoute(builder: (context) => CourseList(filtered: false, finalExam: false,))),
+      () => Navigator.push(context, MaterialPageRoute(builder: (context) => CourseList(favorites: false,filtered: false, finalExam: false,))),
       () => Navigator.push(context, MaterialPageRoute(builder: (context) => ContactUs()))
     ];
     targets[index].call();
