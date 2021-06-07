@@ -32,6 +32,7 @@ dependencies:
   provider: "^5.0.0"
   font_awesome_flutter: ^9.0.0
   animated_text_kit: ^4.2.1
+  flutter_swiper: ^1.1.6
 
   #  cloud_firestore: ^1.0.5
   #  provider: ^5.0.0
