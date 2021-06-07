@@ -1,10 +1,9 @@
-import 'dart:developer';
-
-import 'package:bgu_course_grader/screens/menu/menu_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:bgu_course_grader/models/appBar.dart';
+
+import 'menu/menu_screen.dart';
 
 class ContactUs extends StatelessWidget {
   // This widget is the root of your application.
@@ -12,6 +11,7 @@ class ContactUs extends StatelessWidget {
   Widget build(BuildContext context) {
     final appTitle = 'Contact Us';
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: appTitle,
       home: Scaffold(
         appBar: MyAppBar(),
@@ -47,8 +47,6 @@ class MyCustomFormState extends State<MyCustomForm> {
 
   @override
   Widget build(BuildContext context) {
-    String name;
-    String message;
     final FirebaseFirestore firestore_instance = FirebaseFirestore.instance;
     // Build a Form widget using the _formKey created above.
     return Form(
@@ -56,20 +54,20 @@ class MyCustomFormState extends State<MyCustomForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          TextFormField(
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter some text';
-              }
-              return null;
-            },
-            controller: nameController,
-            decoration: const InputDecoration(
-              icon: const Icon(Icons.person),
-              hintText: 'Enter your name',
-              labelText: 'Name',
-            ),
-          ),
+          // TextFormField(
+          //   validator: (value) {
+          //     if (value == null || value.isEmpty) {
+          //       return 'Please enter some text';
+          //     }
+          //     return null;
+          //   },
+          //   controller: nameController,
+          //   decoration: const InputDecoration(
+          //     icon: const Icon(Icons.person),
+          //     hintText: 'Enter your name',
+          //     labelText: 'Name',
+          //   ),
+          // ),
           TextFormField(
             validator: (value) {
               if (value == null || value.isEmpty) {
@@ -89,14 +87,14 @@ class MyCustomFormState extends State<MyCustomForm> {
             padding: const EdgeInsets.only(left: 150.0, top: 40.0),
             child: new ElevatedButton(
                 onPressed: () {
-                  firestore_instance
-                      .collection('courses')
-                      .get()
-                      .then((value) => {
-                            value.docs.forEach((element) {
-                              log(element.data().toString());
-                            })
-                          });
+                  // firestore_instance
+                  //     .collection('courses')
+                  //     .get()
+                  //     .then((value) => {
+                  //           value.docs.forEach((element) {
+                  //             log(element.data().toString());
+                  //           })
+                  //         });
                   FocusScope.of(context).unfocus();
                   // Validate returns true if the form is valid, or false otherwise.
                   if (_formKey.currentState.validate()) {
@@ -108,7 +106,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                         .collection("ContactUs").doc(user.email + " " + DateTime.now().toString())
                         .set({
                           'email': user.email,
-                          'name': nameController.text,
+                          'name': user.displayName,
                           'message': messageController.text
                         })
                         .then((_) => ScaffoldMessenger.of(context).showSnackBar(
@@ -122,7 +120,12 @@ class MyCustomFormState extends State<MyCustomForm> {
 
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => Menu()));
+                    // Navigator.of(context).pop();
                   }
+                  // int count = 0;
+                  // Navigator.popUntil(context, (route) {
+                  //   return count++ == 2;
+                  // });
                 },
                 child: const Text('Submit')),
           ),
