@@ -94,9 +94,9 @@ class _CoursesListState extends State<CoursesList> {
                   final courses = snapshot1.data.docs;
                   final favoriteUsers = snapshot2.data.docs;
                   List<dynamic> favorites = [];
-                  for (var user in favoriteUsers){
-                    if(user.id == loggedInUser.email){
-                      favorites = user['liked'];
+                  for (var favoriteDoc in favoriteUsers){
+                    if(favoriteDoc.id == loggedInUser.email){
+                      favorites = favoriteDoc['liked'];
                       break;
                     }
                   }
