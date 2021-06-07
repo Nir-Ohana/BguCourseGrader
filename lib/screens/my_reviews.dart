@@ -116,7 +116,7 @@ class _MyReviewsState extends State<MyReviews> {
                           .size
                           .height / 1.5,
                       itemBuilder: (BuildContext context, index) {
-                        return index!=0?swiperItemsList[index]: buildSwiperItem(
+                        return swiperItemsList.length!=0?swiperItemsList[index]: buildSwiperItem(
                             pics[index],
                             "You do not have any reviews yet! Use this app wisely",
                             colors[index],
