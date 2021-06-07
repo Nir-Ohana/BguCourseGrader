@@ -48,6 +48,12 @@ class _HomeScreenState extends State<HomeScreen> {
           }
         }
       }
+      else
+        {
+          fields.add("");
+          fields.add("");
+          fields.add("");
+        }
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
