@@ -8,13 +8,14 @@ import 'package:bgu_course_grader/screens/loading.dart';
 import 'package:bgu_course_grader/models/courseTile.dart';
 
 class CoursesList extends StatefulWidget {
-  final filtered;
-  final dep;
-  final courseName;
-  final courseNum;
-  final hasTest;
+  final bool filtered;
+  final String dep;
+  final String courseName;
+  final String courseNum;
+  final bool hasTest;
+  final bool favorites;
   CoursesList({this.filtered, this.dep, this.courseName,
-  this.courseNum, this.hasTest});
+  this.courseNum, this.hasTest, this.favorites});
 
 
   @override
@@ -50,6 +51,12 @@ class _CoursesListState extends State<CoursesList> {
   }
 
   Stream returnFiltered(){
+    
+
+
+
+
+
     Query collection = _firestore
         .collection('courses');
 
@@ -57,8 +64,7 @@ class _CoursesListState extends State<CoursesList> {
       collection = collection.where('department_name', isEqualTo: widget.dep);
     }
     if (widget.courseName != ''){
-      print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~${widget.courseName}');
-      collection = collection.where('course_name', isGreaterThanOrEqualTo: widget.courseName).where('course_name', isLessThan: widget.courseName + 'z' ); //TODO fix this
+      collection = collection.where('course_name', isGreaterThanOrEqualTo: widget.courseName).where('course_name', isLessThan: widget.courseName + 'z' );
     }
     if(widget.courseNum != ''){
       collection = collection.where('course_number', isEqualTo: widget.courseNum);
@@ -70,12 +76,17 @@ class _CoursesListState extends State<CoursesList> {
       return collection.snapshots();
   }
 
+  Stream returnFavorites(){
+    return _firestore
+        .collection('Favorites').snapshots();
+  }
+
 
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-        stream: !widget.filtered ? returnAll() : returnFiltered(),
+          stream: widget.filtered ? returnFiltered() : widget.favorites ? returnFavorites() : returnAll(),
           builder: (context, snapshot) {
           List<CourseTile> coursesList = [];
           if (snapshot.hasData) {

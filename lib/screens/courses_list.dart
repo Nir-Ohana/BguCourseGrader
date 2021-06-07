@@ -1,24 +1,23 @@
-import 'package:bgu_course_grader/screens/contact_us.dart';
+
 import 'package:flutter/material.dart';
 import 'package:bgu_course_grader/models/appBar.dart';
 import 'package:bgu_course_grader/models/courseList.dart';
-import 'package:provider/provider.dart';
-import 'package:bgu_course_grader/DataBase.dart';
-import 'package:bgu_course_grader/models/course.dart';
+
 
 
 
 class CourseList extends StatefulWidget {
-  final filtered;
-  final department;
-  final courseName;
-  final courseNum;
-  final finalExam;
+  final bool filtered;
+  final String department;
+  final String courseName;
+  final String courseNum;
+  final bool finalExam;
+  final bool favorites;
 
 
 
 
-  CourseList({this.filtered, this.department, this.courseNum, this.courseName, this.finalExam});
+  CourseList({this.filtered, this.department, this.courseNum, this.courseName, this.finalExam, this.favorites});
 
 
 

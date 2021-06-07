@@ -112,7 +112,7 @@ class _AdvancedSearchState extends State<AdvancedSearch> {
 
                           Navigator.push(context, MaterialPageRoute(builder: (context) =>
                               CourseList(filtered: true, department: department,
-                                courseNum: courseNum, courseName: courseName, finalExam: finalExam,)));
+                                courseNum: courseNum, courseName: courseName, finalExam: finalExam, favorites: false,)));
                         },
                         child: Text('חפש',
                           style: TextStyle(
