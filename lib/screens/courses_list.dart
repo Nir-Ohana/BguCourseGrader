@@ -38,7 +38,7 @@ class _CourseListState extends State<CourseList> {
         child: Container(
           child: CoursesList(filtered: widget.filtered,dep: widget.department,
           courseName: widget.courseName, courseNum: widget.courseNum,
-          hasTest: !widget.finalExam),
+          hasTest: !widget.finalExam, favorites: widget.favorites,),
         ),
       ),
 
