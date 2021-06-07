@@ -10,18 +10,44 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final _firestore = FirebaseFirestore.instance;
+  final _auth = FirebaseAuth.instance;
+  User loggedInUser;
+
+  void getCurrentUser() async {
+    try {
+      final user = _auth.currentUser;
+      if (user != null) loggedInUser = user;
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void initState() {
+    super.initState();
+    getCurrentUser();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final user = FirebaseAuth.instance.currentUser;
-    final FirebaseFirestore firestore_instance = FirebaseFirestore.instance;
-    var fields;
-    getData() async {
-      return await firestore_instance.collection("Users").doc(user.displayName).get();
-    }
-    getData().then((val){
-    fields = val.data();
-    });
+    return StreamBuilder<QuerySnapshot>(
+        stream: _firestore
+        .collection('Users')
+        .snapshots(),
+    builder: (context, snapshot) {
+      List<String> fields = [];
+      if (snapshot.hasData) {
+        final reviews = snapshot.data.docs;
+        for (var review in reviews) {
+          if (review.id == loggedInUser.displayName) {
+            final reviewData = (review.data() as Map<String, dynamic>);
+            final department = reviewData['department'];
+            final faculty = reviewData['faculty'];
+            fields.add(department);
+            fields.add(faculty);
+          }
+        }
+      }
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -35,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Center(
-                  child: Image.network(user.photoURL),
+                  child: Image.network(loggedInUser.photoURL),
                 ),
                 Divider(
                   height: 60.0,
@@ -52,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 10.0,
                 ),
                 Text(
-                  user.displayName,
+                  loggedInUser.displayName,
                   style: TextStyle(
                     color: Colors.purpleAccent[800],
                     letterSpacing: 2.0,
@@ -74,7 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 10.0,
                 ),
                 Text(
-                  fields!=null? fields('faculty').toString() : 'מדעי הדשא' ,
+                  fields[1]!=null? fields[1].toString() : 'מדעי הדשא' ,
                   style: TextStyle(
                     color: Colors.purpleAccent[800],
                     letterSpacing: 2.0,
@@ -96,7 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 10.0,
                 ),
                 Text(
-                  fields!=null? fields('department').toString() : 'פלוגת איזי',
+                  fields[0]!=null? fields[0].toString() : 'פלוגת איזי',
                   style: TextStyle(
                     color: Colors.purpleAccent[800],
                     letterSpacing: 2.0,
@@ -130,5 +156,5 @@ class _HomeScreenState extends State<HomeScreen> {
             )),
       ),
     );
-  }
-}
+  });
+}}

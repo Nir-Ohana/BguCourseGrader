@@ -1,4 +1,5 @@
 import 'package:bgu_course_grader/models/appBar.dart';
+import 'package:bgu_course_grader/screens/home/home_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -30,33 +31,28 @@ class _EditProfilePageState extends State<EditProfilePage> {
   final FirebaseFirestore firestore_instance = FirebaseFirestore.instance;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return StreamBuilder<QuerySnapshot>(
+        stream: firestore_instance
+            .collection('Users')
+            .snapshots(),
+        builder: (context, snapshot) {
+          List<String> fields = [];
+          if (snapshot.hasData) {
+            final reviews = snapshot.data.docs;
+            for (var review in reviews) {
+              if (review.id == user.displayName) {
+                final reviewData = (review.data() as Map<String, dynamic>);
+                final department = reviewData['department'];
+                final faculty = reviewData['faculty'];
+                final neighbourhood = reviewData['neighbourhood'];
+                fields.add(department);
+                fields.add(faculty);
+                fields.add(neighbourhood);
+              }
+            }
+          }
+          return Scaffold(
       appBar:MyAppBar(),
-      // appBar: AppBar(
-      //   backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      //   elevation: 1,
-      //   leading: IconButton(
-      //     icon: Icon(
-      //       Icons.arrow_back,
-      //       color: Color(0xFFFDA901),
-      //     ),
-      //     onPressed: () {
-      //       Navigator.of(context).pop();
-      //     },
-      //   ),
-      //   actions: [
-      //     IconButton(
-      //       icon: Icon(
-      //         Icons.settings,
-      //         color: Color(0xFFFDA901),
-      //       ),
-      //       onPressed: () {
-      //         Navigator.of(context).push(MaterialPageRoute(
-      //             builder: (BuildContext context) => SettingsMenu()));
-      //       },
-      //     ),
-      //   ],
-      // ),
       body: Directionality(textDirection: TextDirection.rtl, child:Container(
         padding: EdgeInsets.only(left: 16, top: 25, right: 16),
         child: GestureDetector(
@@ -93,7 +89,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           image: DecorationImage(
                               fit: BoxFit.cover,
                               image: NetworkImage(
-                                "https://images.pexels.com/photos/3307758/pexels-photo-3307758.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=250",
+                                user.photoURL,
                               ))),
                     ),
                     Positioned(
@@ -147,11 +143,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       firestore_instance
                           .collection("Users").doc(user.displayName)
                           .set({
-                       'faculty': facultyController.text!=""? facultyController.text: DoNothingAction(),
-                        'department' : departmentController.text!=""? departmentController.text : DoNothingAction() ,
-                        'neighrbourhood' : neighbourhoodController.text!= ""? neighbourhoodController.text: DoNothingAction() });
-                      Navigator.of(context).pop();
-                    },
+                        'faculty': facultyController.text!=""? facultyController.text: fields[1],
+                        'department' : departmentController.text!=""? departmentController.text : fields[0] ,
+                        'neighbourhood' : neighbourhoodController.text!= ""? neighbourhoodController.text: fields[2] });
+                        Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => HomeScreen()));},
                     color: Color(0xFFFDA901),
                     padding: EdgeInsets.symmetric(horizontal: 50),
                     elevation: 2,
@@ -174,6 +170,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
     )
     );
   }
+  );}
   void dispose() {
     // Clean up the controller when the widget is disposed.
     nameController.dispose();
@@ -214,6 +211,4 @@ class _EditProfilePageState extends State<EditProfilePage> {
               color: Colors.grey,
             )),
       ),
-    );
-  }
-}
+    );}}
