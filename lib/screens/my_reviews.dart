@@ -95,7 +95,7 @@ class _MyReviewsState extends State<MyReviews> {
                     flex: 6,
                     child: Swiper(
                       controller: _swiperController,
-                      itemCount: swiperItemsList.length,
+                      itemCount: swiperItemsList.length!=0?swiperItemsList.length: 1,
                       onIndexChanged: (int value) {
                         if (value == 2) {
                           setState(() {
@@ -116,7 +116,12 @@ class _MyReviewsState extends State<MyReviews> {
                           .size
                           .height / 1.5,
                       itemBuilder: (BuildContext context, index) {
-                        return swiperItemsList[index];
+                        return index!=0?swiperItemsList[index]: buildSwiperItem(
+                            pics[index],
+                            "You do not have any reviews yet! Use this app wisely",
+                            colors[index],
+                            gradients[index],
+                            "WHAT ARE YOU WAITING FOR?!");
                       },
                       layout: SwiperLayout.TINDER,
                       curve: Curves.bounceOut,
