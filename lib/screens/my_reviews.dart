@@ -36,7 +36,7 @@ class _MyReviewsState extends State<MyReviews> {
     final user = _auth.currentUser;
     List<String> pics = ["https://www.sushiwithgusto.com/wp-content/uploads/2016/11/uramaki_sushi-300rev.png","https://pngimg.com/uploads/donut/donut_PNG47.png",
       "https://toppng.com/public/uploads/preview/ice-cream-115283212700qrzu6fyi3.png"];
-    List<LinearGradient> gradients = [firstGradient, secondtGradient, thirdGradient];
+    List<LinearGradient> gradients = [firstGradient, secondGradient, thirdGradient];
     List<Color> colors = [Color(0xFFfba457), Color(0xFFffcc00),Color(0xFFd18cd6) ];
     // List<Widget> swiperItemsList = [
     //   buildSwiperItem(
@@ -49,7 +49,7 @@ class _MyReviewsState extends State<MyReviews> {
     //       "http://pngimg.com/uploads/donut/donut_PNG47.png",
     //       "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas",
     //       Color(0xFFffcc00),
-    //       secondtGradient,
+    //       secondGradient,
     //       "PROMOTIONS!"),
     //   buildSwiperItem(
     //       "https://toppng.com/public/uploads/preview/ice-cream-115283212700qrzu6fyi3.png",
@@ -71,13 +71,13 @@ class _MyReviewsState extends State<MyReviews> {
             for (var review in reviews) {
               final reviewData = (review.data() as Map<String, dynamic>);
               final reviewContent = reviewData['review_content'];
-              final reviewCourseNumber = reviewData['course_number'];
+              final reviewCourseName = reviewData['course_name'];
               swiperItemsList.add(buildSwiperItem(
                   pics[index],
                   reviewContent.toString(),
                   colors[index],
                   gradients[index],
-                  reviewCourseNumber.toString()));
+                  reviewCourseName.toString()));
               index++;
               index = index%2;
             }
@@ -276,7 +276,7 @@ class _MyReviewsState extends State<MyReviews> {
               endText,
               style: TextStyle(
                 fontFamily: "Poppins",
-                color: Colors.black12,
+                color: Colors.orange,
                 fontSize: 22,
               ),
             ),
@@ -295,7 +295,7 @@ const firstGradient = LinearGradient(
   ],
 );
 
-const secondtGradient = LinearGradient(
+const secondGradient = LinearGradient(
   colors: [
     Color(0xFFfeb700),
     Color(0xFFffcc00),

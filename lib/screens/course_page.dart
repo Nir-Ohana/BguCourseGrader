@@ -23,7 +23,6 @@ class _CoursePageState extends State<CoursePage>{
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: Center(
         child: SafeArea(
@@ -42,7 +41,7 @@ class _CoursePageState extends State<CoursePage>{
                 textDirection: TextDirection.rtl,
               ),
               Text(
-                'תקציר:\n\ ${widget.course_summary}\n',
+                widget.course_summary.isNotEmpty ? 'תקציר:\n\ ${widget.course_summary}\n' : 'תקציר: \n וואלה אין תקציר',
                 textDirection: TextDirection.rtl,
               ),
               ElevatedButton(
