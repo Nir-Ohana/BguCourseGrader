@@ -18,6 +18,10 @@ class _CourseTileState extends State<CourseTile> {
   final loggedUser = FirebaseAuth.instance.currentUser;
   final FirebaseFirestore firestore_instance = FirebaseFirestore.instance;
 
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
@@ -28,7 +32,7 @@ class _CourseTileState extends State<CourseTile> {
         List<dynamic> favorites = [];
         if(snapshot.hasData) {
           final favoriteUsers = snapshot.data.docs;
-          String currentUser;
+
           for(var user in favoriteUsers){
             if (user.id == loggedUser.email){
               favorites = user['liked'];

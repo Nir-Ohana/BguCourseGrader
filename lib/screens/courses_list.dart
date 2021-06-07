@@ -1,4 +1,5 @@
 
+import 'package:bgu_course_grader/models/favoritesList.dart';
 import 'package:flutter/material.dart';
 import 'package:bgu_course_grader/models/appBar.dart';
 import 'package:bgu_course_grader/models/courseList.dart';
@@ -36,7 +37,7 @@ class _CourseListState extends State<CourseList> {
       body: Directionality(
         textDirection: TextDirection.rtl,
         child: Container(
-          child: CoursesList(filtered: widget.filtered,dep: widget.department,
+          child: widget.favorites ? FavoriteList() : CoursesList(filtered: widget.filtered,dep: widget.department,
           courseName: widget.courseName, courseNum: widget.courseNum,
           hasTest: !widget.finalExam,),
         ),
