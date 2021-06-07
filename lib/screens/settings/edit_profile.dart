@@ -146,8 +146,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         'faculty': facultyController.text!=""? facultyController.text: fields[1],
                         'department' : departmentController.text!=""? departmentController.text : fields[0] ,
                         'neighbourhood' : neighbourhoodController.text!= ""? neighbourhoodController.text: fields[2] });
-                        Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => HomeScreen()));},
+                      Navigator.of(context).popUntil((route) => route.isFirst);},
                     color: Color(0xFFFDA901),
                     padding: EdgeInsets.symmetric(horizontal: 50),
                     elevation: 2,

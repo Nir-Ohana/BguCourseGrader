@@ -37,14 +37,15 @@ class _HomeScreenState extends State<HomeScreen> {
     builder: (context, snapshot) {
       List<String> fields = [];
       if (snapshot.hasData) {
-        final reviews = snapshot.data.docs;
-        for (var review in reviews) {
-          if (review.id == loggedInUser.displayName) {
-            final reviewData = (review.data() as Map<String, dynamic>);
-            final department = reviewData['department'];
-            final faculty = reviewData['faculty'];
+        final fieldss = snapshot.data.docs;
+        for (var field in fieldss) {
+          if (field.id == loggedInUser.displayName) {
+            final fieldData = (field.data() as Map<String, dynamic>);
+            final department = fieldData['department'];
+            final faculty = fieldData['faculty'];
             fields.add(department);
             fields.add(faculty);
+            break;
           }
         }
       }
