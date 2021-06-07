@@ -97,8 +97,10 @@ class _CoursePageState extends State<CoursePage>{
                                             content:
                                             Text('Ya Walli, we have a problem.'))));
 
-                                        Navigator.push(context,
-                                            MaterialPageRoute(builder: (context) => Menu()));
+                                      int count = 0;
+                                      Navigator.popUntil(context, (route) {
+                                        return count++ == 3;
+                                      });
                                     },
                                     child: const Text('Submit')),
                               ),
