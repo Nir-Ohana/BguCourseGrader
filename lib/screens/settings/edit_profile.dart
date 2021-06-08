@@ -151,7 +151,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         'faculty': facultyController.text!=""? facultyController.text: fields[1],
                         'department' : departmentController.text!=""? departmentController.text : fields[0] ,
                         'neighbourhood' : neighbourhoodController.text!= ""? neighbourhoodController.text: fields[2],
-                        'year' : yearController.text!= ""? yearController.text: fields[3]});
+                        'year' : yearController.text!= ""? yearController.text: fields[3],
+                        'photoURL' : user.photoURL});
                       Navigator.of(context).popUntil((route) => route.isFirst);},
                     style: ElevatedButton.styleFrom(
                       primary: Color(0xFFFDA901),

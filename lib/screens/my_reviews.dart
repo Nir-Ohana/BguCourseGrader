@@ -285,7 +285,7 @@ class _MyReviewsState extends State<MyReviews> {
               style: TextStyle(
                 fontFamily: "Poppins",
                 color: Colors.orangeAccent[200],
-                fontSize: 22,
+                fontSize: 18,
               ),
             ),
           ),

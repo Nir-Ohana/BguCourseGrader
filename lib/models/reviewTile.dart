@@ -1,3 +1,4 @@
+import 'package:bgu_course_grader/models/show_profile.dart';
 import 'package:flutter/material.dart';
 
 
@@ -24,6 +25,10 @@ class ReviewTile extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             ListTile(
+              onLongPress: () {
+                Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => Profile(userName)));
+              },
               title: Text(userName),
               subtitle: Text(reviewContent),
             ),

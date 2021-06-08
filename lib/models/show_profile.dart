@@ -3,29 +3,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:bgu_course_grader/screens/menu/menu_screen.dart';
 
-class HomeScreen extends StatefulWidget {
-  @override
-  _HomeScreenState createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
+class Profile extends StatelessWidget {
+  final String userName;
   final _firestore = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
-  User loggedInUser;
 
-  void getCurrentUser() async {
-    try {
-      final user = _auth.currentUser;
-      if (user != null) loggedInUser = user;
-    } catch (e) {
-      print(e);
-    }
-  }
+  Profile(this.userName);
 
-  void initState() {
-    super.initState();
-    getCurrentUser();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,21 +22,24 @@ class _HomeScreenState extends State<HomeScreen> {
       if (snapshot.hasData) {
         final fieldss = snapshot.data.docs;
         for (var field in fieldss) {
-          if (field.id == loggedInUser.displayName) {
+          if (field.id == userName) {
             final fieldData = (field.data() as Map<String, dynamic>);
             final department = fieldData['department'];
             final faculty = fieldData['faculty'];
             final neighbourhood = fieldData['neighbourhood'];
             final year = fieldData['year'];
+            final photoURL = fieldData['photoURL'];
             fields.add(department);
             fields.add(faculty);
             fields.add(neighbourhood);
             fields.add(year);
+            fields.add(photoURL);
             break;
           }
         }
       }
       else {
+        fields.add("");
         fields.add("");
         fields.add("");
         fields.add("");
@@ -195,11 +182,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           CircleAvatar(
                             radius: 65.0,
                             child: ClipOval(child:Image.network(
-                                loggedInUser.photoURL)),
+                                fields[4]!=null?fields[4]: "https://cdn3.iconfinder.com/data/icons/users-outline/60/50_-Blank_Profile-_user_people_group_team-512.png")),
                             backgroundColor: Colors.transparent,
                           ),
                           SizedBox(height: 10.0,),
-                          Text(loggedInUser.displayName,
+                          Text(userName,
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 20.0,
@@ -365,36 +352,36 @@ class _HomeScreenState extends State<HomeScreen> {
                 )],
             ),
             Positioned(
-                top: MediaQuery
-                    .of(context)
-                    .size
-                    .height * 0.45,
-                left: 20.0,
-                right: 20.0,
-                child: InkWell(
-                child:
+              top: MediaQuery
+                  .of(context)
+                  .size
+                  .height * 0.45,
+              left: 20.0,
+              right: 20.0,
+              child: InkWell(
+                  child:
                   Card(
                     shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
+                      borderRadius: BorderRadius.circular(10.0),
 
-                  ),
+                    ),
                     child: Padding(
-                      padding: EdgeInsets.all(25.0),
-                      child: Text(
-                          'לתפריט',
-                          style: TextStyle(
-                              color: Colors.deepOrangeAccent,
-                            fontSize: 16.0),
-                          textAlign: TextAlign.center
+                        padding: EdgeInsets.all(25.0),
+                        child: Text(
+                            'חזור',
+                            style: TextStyle(
+                                color: Colors.deepOrangeAccent,
+                                fontSize: 16.0),
+                            textAlign: TextAlign.center
                         )
-      ),
-                      ),
+                    ),
+                  ),
 
-                        onTap: () {Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Menu()));
-      }
-      ),
-                )
+                  onTap: () {Navigator.canPop(context)? Navigator.of(context).pop(): Navigator.push(context,
+    MaterialPageRoute(builder: (context) => Menu()));
+                  }
+              ),
+            )
             ],
 
         ),
