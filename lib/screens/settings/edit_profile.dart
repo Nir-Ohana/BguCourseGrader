@@ -27,6 +27,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   final facultyController = TextEditingController();
   final departmentController = TextEditingController();
   final neighbourhoodController = TextEditingController();
+  final yearController = TextEditingController();
   final user = FirebaseAuth.instance.currentUser;
   final FirebaseFirestore firestore_instance = FirebaseFirestore.instance;
   @override
@@ -45,9 +46,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 final department = reviewData['department'];
                 final faculty = reviewData['faculty'];
                 final neighbourhood = reviewData['neighbourhood'];
+                final year = reviewData['year'];
                 fields.add(department);
                 fields.add(faculty);
                 fields.add(neighbourhood);
+                fields.add(year);
               }
             }
           }
@@ -120,16 +123,20 @@ class _EditProfilePageState extends State<EditProfilePage> {
               buildTextField("פקולטה", "מדעי הדשא",facultyController, false),
               buildTextField("מחלקה", "פלוגת איזי",departmentController, false),
               buildTextField("שכונה", "ד' הישנה",neighbourhoodController, false),
+              buildTextField("שנה", "בוגר תיכון אקסטרני",yearController, false),
               SizedBox(
                 height: 35,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  OutlineButton(
-                    padding: EdgeInsets.symmetric(horizontal: 50),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.symmetric(horizontal: 50),
+                      shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
+                    primary: Colors.white),
+
                     onPressed: () {Navigator.of(context).pop();},
                     child: Text("ביטול",
                         style: TextStyle(
@@ -137,7 +144,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             letterSpacing: 2.2,
                             color: Colors.black)),
                   ),
-                  RaisedButton(
+                  ElevatedButton(
                     onPressed: () {
                       print(facultyController.text);
                       firestore_instance
@@ -145,13 +152,17 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           .set({
                         'faculty': facultyController.text!=""? facultyController.text: fields[1],
                         'department' : departmentController.text!=""? departmentController.text : fields[0] ,
-                        'neighbourhood' : neighbourhoodController.text!= ""? neighbourhoodController.text: fields[2] });
+                        'neighbourhood' : neighbourhoodController.text!= ""? neighbourhoodController.text: fields[2],
+                        'year' : yearController.text!= ""? yearController.text: fields[3]});
                       Navigator.of(context).popUntil((route) => route.isFirst);},
-                    color: Color(0xFFFDA901),
-                    padding: EdgeInsets.symmetric(horizontal: 50),
-                    elevation: 2,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)),
+                    style: ElevatedButton.styleFrom(
+                      primary: Color(0xFFFDA901),
+                      padding: EdgeInsets.symmetric(horizontal: 50),
+                      elevation: 2,
+                      shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20))
+                    )
+                   ,
                     child: Text(
                       "שמירה",
                       style: TextStyle(
