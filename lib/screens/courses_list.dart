@@ -33,7 +33,7 @@ class _CourseListState extends State<CourseList> {
     return Scaffold(
       appBar: MyAppBar(),
       resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.orange[300],
+      backgroundColor: Colors.orange[100],
       body: Directionality(
         textDirection: TextDirection.rtl,
         child: Container(

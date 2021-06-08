@@ -34,8 +34,11 @@ class _MyReviewsState extends State<MyReviews> {
   @override
   Widget build(BuildContext context) {
     final user = _auth.currentUser;
-    List<String> pics = ["https://www.sushiwithgusto.com/wp-content/uploads/2016/11/uramaki_sushi-300rev.png","https://pngimg.com/uploads/donut/donut_PNG47.png",
-      "https://toppng.com/public/uploads/preview/ice-cream-115283212700qrzu6fyi3.png"];
+    List<String> pics = ["https://in.bgu.ac.il/welcome/Pics/Pages/Contact-Us/reg-consult.jpg","https://img.wcdn.co.il/f_auto,q_auto,w_700/3/0/3/5/3035519-46.jpeg",
+      "https://www.kolhair.co.il/wp-content/uploads/2018/07/48494388e91bf0d68559314efcb366d1.jpg","https://in.bgu.ac.il/PublishingImages/Pages/news/eilat-growth/eilat-campus.jpg",
+      "https://img.haarets.co.il/img/1.9446805/329712834.jpg?precrop=2200,1468,x0,y0&height=234&width=350","https://static.wixstatic.com/media/ca06ba_5d1f1aa41725400c8e906a01a4cd313b~mv2.jpg/v1/fill/w_472,h_576,al_c,q_80,usm_0.66_1.00_0.01/ca06ba_5d1f1aa41725400c8e906a01a4cd313b~mv2.webp"
+      ,"https://www.limod.co.il/wp-content/uploads/thumbs/2020_05_27_045-3brhmz49ojiozsjzc2zt3e.jpg","http://podcastim.org.il/wp-content/uploads/2020/03/BGU-radio-%D7%A4%D7%95%D7%93%D7%A7%D7%90%D7%A1%D7%98-%D7%90%D7%95%D7%A0%D7%99%D7%91%D7%A8%D7%A1%D7%99%D7%98%D7%AA-%D7%91%D7%9F-%D7%92%D7%95%D7%A8%D7%99%D7%95%D7%9F.jpg",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQag_zkEvkoeTHcfh3rytL7hIidwQoFGC2IKg&usqp=CAU","https://in.bgu.ac.il/hr/career/DocLib/Pages/work-at-bgu/tCAL1N41A.jpg"];
     List<LinearGradient> gradients = [firstGradient, secondGradient, thirdGradient];
     List<Color> colors = [Color(0xFFfba457), Color(0xFFffcc00),Color(0xFFd18cd6) ];
     // List<Widget> swiperItemsList = [
@@ -66,6 +69,7 @@ class _MyReviewsState extends State<MyReviews> {
         builder: (context, snapshot) {
           List<Widget> swiperItemsList = [];
           int index = 0;
+          int picIndex = 0;
           if (snapshot.hasData) {
             final reviews = snapshot.data.docs;
             for (var review in reviews) {
@@ -73,12 +77,14 @@ class _MyReviewsState extends State<MyReviews> {
               final reviewContent = reviewData['review_content'];
               final reviewCourseName = reviewData['course_name'];
               swiperItemsList.add(buildSwiperItem(
-                  pics[index],
+                  pics[picIndex],
                   reviewContent.toString(),
                   colors[index],
                   gradients[index],
                   reviewCourseName.toString()));
+              picIndex++;
               index++;
+              picIndex = picIndex%9;
               index = index%2;
             }
           }
@@ -190,7 +196,7 @@ class _MyReviewsState extends State<MyReviews> {
           ],
         ),
         decoration: BoxDecoration(
-          color: Colors.orange,
+          color: Colors.orangeAccent[200],
           boxShadow: [
             BoxShadow(
               color: Colors.grey,
@@ -240,9 +246,11 @@ class _MyReviewsState extends State<MyReviews> {
                         )
                       ]),
                 ),
-                Image.network(
-                  image,
-                  fit: BoxFit.contain,
+                CircleAvatar(
+                  radius: 110.0,
+                  backgroundImage:
+                  NetworkImage(image),
+                  backgroundColor: Colors.transparent,
                 )
               ],
             ),
@@ -276,7 +284,7 @@ class _MyReviewsState extends State<MyReviews> {
               endText,
               style: TextStyle(
                 fontFamily: "Poppins",
-                color: Colors.orange,
+                color: Colors.orangeAccent[200],
                 fontSize: 22,
               ),
             ),
@@ -304,8 +312,8 @@ const secondGradient = LinearGradient(
 
 const thirdGradient = LinearGradient(
   colors: [
-    Color(0xFFa978ad),
-    Color(0xFFd18cd6),
+    Color(0xffe78f20),
+    Color(0xfff6c26a),
   ],
 );
 

@@ -35,7 +35,7 @@ class _AdvancedSearchState extends State<AdvancedSearch> {
       },
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.orange[300],
+        backgroundColor: Colors.orange[100],
         appBar: MyAppBar(),
         body: Container(
           padding: EdgeInsets.symmetric(vertical: 20, horizontal: 50),
@@ -106,7 +106,7 @@ class _AdvancedSearchState extends State<AdvancedSearch> {
                       padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                       child: ElevatedButton(
                         style: ButtonStyle(
-                          backgroundColor:  MaterialStateProperty.all<Color>(Colors.orange[800]),
+                          backgroundColor:  MaterialStateProperty.all<Color>(Colors.orangeAccent[400]),
                         ),
                         onPressed: () async {
 
@@ -116,7 +116,7 @@ class _AdvancedSearchState extends State<AdvancedSearch> {
                         },
                         child: Text('חפש',
                           style: TextStyle(
-                              color: Colors.black
+                              color: Colors.white
                           ),
                         ),
                       ),

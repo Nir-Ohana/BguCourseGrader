@@ -52,6 +52,7 @@ class MyCustomFormState extends State<MyCustomForm> {
     return Form(
       key: _formKey,
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           // TextFormField(
@@ -68,7 +69,7 @@ class MyCustomFormState extends State<MyCustomForm> {
           //     labelText: 'Name',
           //   ),
           // ),
-          TextFormField(
+          Container(child:TextFormField(
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return 'Please enter some text';
@@ -77,15 +78,18 @@ class MyCustomFormState extends State<MyCustomForm> {
             },
             controller: messageController,
             decoration: const InputDecoration(
-              icon: const Icon(Icons.question_answer),
+              icon: const Icon(Icons.question_answer, color: Colors.orangeAccent,),
               hintText: 'How may we help you?',
               labelText: 'Message',
             ),
             maxLines: null,
           ),
+          margin: EdgeInsets.all(25.0),
+          ),
           new Container(
             padding: const EdgeInsets.only(left: 150.0, top: 40.0),
             child: new ElevatedButton(
+              style: ElevatedButton.styleFrom(primary: Colors.orangeAccent[400]),
                 onPressed: () {
                   // firestore_instance
                   //     .collection('courses')

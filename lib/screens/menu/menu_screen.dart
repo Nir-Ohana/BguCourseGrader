@@ -1,8 +1,5 @@
 import 'package:bgu_course_grader/models/appBar.dart';
-import 'package:bgu_course_grader/models/favoritesList.dart';
 import 'package:flutter/material.dart';
-import 'menu_choice_list.dart';
-
 import 'package:bgu_course_grader/screens/my_reviews.dart';
 import 'package:bgu_course_grader/screens/courses_list.dart';
 import 'package:bgu_course_grader/screens/contact_us.dart';

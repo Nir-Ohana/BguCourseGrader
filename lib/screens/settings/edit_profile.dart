@@ -1,9 +1,7 @@
 import 'package:bgu_course_grader/models/appBar.dart';
-import 'package:bgu_course_grader/screens/home/home_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:bgu_course_grader/screens/settings/settings_main.dart';
 
 class SettingsUI extends StatelessWidget {
   @override

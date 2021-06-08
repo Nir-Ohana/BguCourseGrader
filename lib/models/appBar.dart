@@ -25,7 +25,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
     }
 
     return AppBar(
-        backgroundColor: Colors.orange[800],
+        backgroundColor: Colors.orangeAccent[400],
       title: Padding(
         padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
 
@@ -40,7 +40,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
           textDirection: TextDirection.rtl,
           child: ElevatedButton.icon(
               style: ButtonStyle(
-                backgroundColor:  MaterialStateProperty.all<Color>(Colors.orange[800]),
+                backgroundColor:  MaterialStateProperty.all<Color>(Colors.orangeAccent[400]),
               ),
               onPressed: () {
                 final provider = Provider.of<GoogleSignInProvider>(
@@ -55,7 +55,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
           textDirection: TextDirection.rtl,
           child: ElevatedButton.icon(
               style: ButtonStyle(
-                backgroundColor:  MaterialStateProperty.all<Color>(Colors.orange[800]),
+                backgroundColor:  MaterialStateProperty.all<Color>(Colors.orangeAccent[400]),
               ),
               onPressed:  (){ Navigator.push(context,
     MaterialPageRoute(builder: (context) => SettingsMenu()));},

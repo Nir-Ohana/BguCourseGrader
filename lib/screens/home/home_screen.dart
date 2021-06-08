@@ -1,4 +1,3 @@
-import 'package:bgu_course_grader/models/appBar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +29,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    int counter = 0;
     return StreamBuilder<QuerySnapshot>(
         stream: _firestore
         .collection('Users')
@@ -234,7 +232,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           fontSize: 17.0,
                                           fontWeight: FontWeight.w800,
                                         ),),
-                                      Divider(color: Colors.grey[300],),
+                                      Divider(color: Colors.blueGrey[200],),
                                       Row(
                                         mainAxisAlignment: MainAxisAlignment
                                             .start,
@@ -251,12 +249,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                             children: [
                                               Text("מחלקה",
                                                 style: TextStyle(
-                                                  fontSize: 15.0,
+                                                  fontSize: 12.0,
+                                                  color: Colors.grey[400],
                                                 ),),
                                               Text(fields[0]!=null? fields[0].toString() : 'פלוגת איזי',
                                                 style: TextStyle(
-                                                  fontSize: 12.0,
-                                                  color: Colors.grey[400],
+                                                  fontSize: 15.0,
                                                 ),)
                                             ],
                                           )
@@ -280,13 +278,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                             children: [
                                               Text("פקולטה",
                                                 style: TextStyle(
-                                                  fontSize: 15.0,
+                                                  fontSize: 12.0,
+                                                  color: Colors.grey[400],
                                                 ),),
                                               Text(
                                                 fields[1]!=null? fields[1].toString() : 'מדעי הדשא',
                                                 style: TextStyle(
-                                                  fontSize: 12.0,
-                                                  color: Colors.grey[400],
+                                                  fontSize: 15.0,
                                                 ),)
                                             ],
                                           )
@@ -310,12 +308,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                             children: [
                                               Text("שכונה",
                                                 style: TextStyle(
-                                                  fontSize: 15.0,
+                                                  fontSize: 12.0,
+                                                  color: Colors.grey[400],
                                                 ),),
                                               Text(fields[2]!=null? fields[2].toString() : 'הומלס לבינתיים',
                                                 style: TextStyle(
-                                                  fontSize: 12.0,
-                                                  color: Colors.grey[400],
+                                                  fontSize: 15.0,
                                                 ),)
                                             ],
                                           )
@@ -339,12 +337,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                             children: [
                                               Text("שנה",
                                                 style: TextStyle(
-                                                  fontSize: 15.0,
+                                                  fontSize: 12.0,
+                                                  color: Colors.grey[400],
                                                 ),),
                                               Text(fields[3]!=null? fields[3].toString() : 'WHAT YEAR IS THIS?!',
                                                 style: TextStyle(
-                                                  fontSize: 12.0,
-                                                  color: Colors.grey[400],
+                                                  fontSize: 15.0,
                                                 ),)
                                             ],
                                           )

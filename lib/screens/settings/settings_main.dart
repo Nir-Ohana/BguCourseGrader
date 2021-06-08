@@ -79,14 +79,14 @@ class _SettingsPageState extends State<SettingsMenu> {
               height: 50,
             ),
             Center(
-              child: OutlineButton(
-                padding: EdgeInsets.symmetric(horizontal: 40),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(padding: EdgeInsets.symmetric(horizontal: 40), primary: Colors.orangeAccent[200],
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),),
                 onPressed: () {},
                 child: Text("SIGN OUT",
                     style: TextStyle(
-                        fontSize: 16, letterSpacing: 2.2, color: Colors.black)),
+                        fontSize: 16, letterSpacing: 2.2, color: Colors.white)),
               ),
             )
           ],
@@ -110,7 +110,7 @@ class _SettingsPageState extends State<SettingsMenu> {
         Transform.scale(
             scale: 0.7,
             child: CupertinoSwitch(
-              activeColor: Color(0xFFFDA901),
+              activeColor: Colors.orangeAccent[200],
               onChanged: _onSwitchChanged,
               value: isActive,
             ))
@@ -141,7 +141,7 @@ class _SettingsPageState extends State<SettingsMenu> {
                   ],
                 ),
                 actions: [
-                  FlatButton(
+                  ElevatedButton(
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
@@ -191,7 +191,7 @@ class _SettingsPageState extends State<SettingsMenu> {
                 ],
               ),
               actions: [
-                FlatButton(
+               ElevatedButton(
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
