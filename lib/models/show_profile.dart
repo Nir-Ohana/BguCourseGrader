@@ -356,8 +356,8 @@ class Profile extends StatelessWidget {
                   .of(context)
                   .size
                   .height * 0.45,
-              left: 20.0,
-              right: 20.0,
+              left: 30.0,
+              right: 30.0,
               child: InkWell(
                   child:
                   Card(
@@ -366,12 +366,12 @@ class Profile extends StatelessWidget {
 
                     ),
                     child: Padding(
-                        padding: EdgeInsets.all(25.0),
+                        padding: EdgeInsets.all(23.0),
                         child: Text(
                             'חזור',
                             style: TextStyle(
                                 color: Colors.deepOrangeAccent,
-                                fontSize: 16.0),
+                                fontSize: 20.0),
                             textAlign: TextAlign.center
                         )
                     ),
