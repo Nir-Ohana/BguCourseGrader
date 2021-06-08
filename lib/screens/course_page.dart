@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'course_reviews.dart';
 import 'menu/menu_screen.dart';
 
 class CoursePage extends StatefulWidget {
@@ -155,7 +156,7 @@ class _CoursePageState extends State<CoursePage> {
                   ),
                 ),
                 ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => CourseReviews(courseName: widget.course_name,)));},
                     child: const Text("לחץ על מנת לראות ביקורות לקורס זה",
                         style: TextStyle(color: Colors.black))),
               ],
