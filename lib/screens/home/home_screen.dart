@@ -381,7 +381,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           'לתפריט',
                           style: TextStyle(
                               color: Colors.deepOrangeAccent,
-                            fontSize: 16.0,),
+                            fontSize: 16.0),
                           textAlign: TextAlign.center
                         )
       ),
