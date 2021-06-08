@@ -1,4 +1,5 @@
 import 'package:bgu_course_grader/models/appBar.dart';
+import 'package:bgu_course_grader/models/favoritesList.dart';
 import 'package:flutter/material.dart';
 import 'menu_choice_list.dart';
 
@@ -24,33 +25,145 @@ class Menu extends StatelessWidget {
   }
 
 
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//         resizeToAvoidBottomInset: false,
+//         backgroundColor: Colors.orange[100],
+//         appBar: MyAppBar(),
+//         body: Directionality(
+//           textDirection: TextDirection.rtl,
+//           child: ListView.builder(
+//             itemCount: 5,
+//             itemBuilder: (context, index){
+//               return Padding(
+//                 padding: EdgeInsets.symmetric(vertical: 1, horizontal: 4),
+//                 child: Card(
+//                   color: Colors.orange[200],
+//                   child: ListTile(
+//                     onTap: (){_navigator(index, context);},                              // routing to required menu option
+//                     title: Text(
+//                         choices[index]
+//                     ),
+//                   ),
+//                 ),
+//               );
+//             },
+//           ),
+//         )
+//     );
+//   }
+// }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.orange[100],
         appBar: MyAppBar(),
-        body: Directionality(
-          textDirection: TextDirection.rtl,
-          child: ListView.builder(
-            itemCount: 5,
-            itemBuilder: (context, index){
-              return Padding(
-                padding: EdgeInsets.symmetric(vertical: 1, horizontal: 4),
-                child: Card(
-                  color: Colors.orange[200],
-                  child: ListTile(
-                    onTap: (){_navigator(index, context);},                              // routing to required menu option
-                    title: Text(
-                        choices[index]
-                    ),
-                  ),
+        body: Directionality(textDirection: TextDirection.rtl, child: GridView.count(
+            crossAxisCount: 2,
+            children: <Widget>[buildCardWithIcon(Icons.search_outlined,
+              context,
+                  () {
+                _navigator(1, context);
+              },
+              "חיפוש מתקדם",
+            ),
+              buildCardWithIcon(Icons.rate_review_sharp,
+                context,
+                    () {
+                  _navigator(2, context);
+                },
+                "הביקורות שלי",
+              ),
+              buildCardWithIcon(Icons.list_alt,
+                context,
+                    () {
+                  _navigator(3, context);
+                },
+                "רשימת קורסים",
+              ),
+              buildCardWithIcon(Icons.favorite_outlined,
+                context,
+                    () {
+                  _navigator(0, context);
+                },
+                "מועדפים",
+              ),
+              buildCardWithIcon(Icons.hearing_outlined,
+                context,
+                    () {
+                      _navigator(4, context);
+                },
+                "צרו קשר",
+              )
+            ]
+        ),
+        ));
+  }
+
+
+  //     ListView.builder(
+  //       itemCount: 5,
+  //       itemBuilder: (context, index){
+  //           return Padding(
+  //               padding: EdgeInsets.symmetric(vertical: 1, horizontal: 4),
+  //             child: Card(
+  //               color: Colors.orange[200],
+  //               child: ListTile(
+  //                 onTap: (){_navigator(index, context);},                              // routing to required menu option
+  //                 title: Text(
+  //                   choices[index]
+  //                 ),
+  //               ),
+  //             ),
+  //           );
+  //       },
+  //     ),
+  //   )
+//     // );
+//   }
+// }
+
+  Padding buildCardWithIcon(IconData icon, context, VoidCallback onTap,
+      String pageName) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: InkWell(
+        onTap: onTap,
+        child: Card(
+          elevation: 8,
+          shape:
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          child: Container(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Icon(
+                  icon,
+                  size: 70,
+                  color: Color(0xFFEE7C21),
                 ),
-              );
-            },
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  pageName,
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Color(0xFFCB6B03),
+                  ),
+                  softWrap: true,
+                  overflow: TextOverflow.clip,
+                  textAlign: TextAlign.center,
+                )
+              ],
+            ),
           ),
-        )
+        ),
+      ),
     );
   }
 }
-
