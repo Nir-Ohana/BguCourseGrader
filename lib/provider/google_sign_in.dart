@@ -15,6 +15,7 @@ class GoogleSignInProvider extends ChangeNotifier{
       final user = _auth.currentUser;
       if (user != null) {
         loggedInUser = user;
+        if(_firestore.collection("Users").doc(loggedInUser.displayName).get() == null)
         _firestore
             .collection("Users").doc(loggedInUser.displayName)
             .set({

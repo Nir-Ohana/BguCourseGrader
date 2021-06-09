@@ -183,7 +183,7 @@ class Profile extends StatelessWidget {
                           CircleAvatar(
                             radius: 65.0,
                             child: ClipOval(child:Image.network(
-                                fields[4]!=null?fields[4]: "https://cdn3.iconfinder.com/data/icons/users-outline/60/50_-Blank_Profile-_user_people_group_team-512.png")),
+                                fields[4]!=null?fields[4]: "https://www.cdn3.iconfinder.com/data/icons/users-outline/60/50_-Blank_Profile-_user_people_group_team-512.png")),
                             backgroundColor: Colors.transparent,
                           ),
                           SizedBox(height: 10.0,),
