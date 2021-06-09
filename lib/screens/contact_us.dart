@@ -9,14 +9,12 @@ class ContactUs extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    final appTitle = 'Contact Us';
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: appTitle,
-      home: Scaffold(
+
+    return
+      Scaffold(
         body: MyCustomForm(),
-      ),
-    );
+      );
+
   }
 }
 
@@ -106,7 +104,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                     ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content:  Text('מאבד את הנתונים...', textDirection:TextDirection.rtl,)));
                     firestore_instance
-                        .collection("ContactUs").doc(user.displayName)
+                        .collection("ContactUs").doc(user.displayName + ' ' + DateTime.now().toString())
                         .set({
                           'email': user.email,
                           'name': user.displayName,

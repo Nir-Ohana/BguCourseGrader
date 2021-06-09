@@ -1,4 +1,3 @@
-
 import 'package:bgu_course_grader/screens/settings/settings_main.dart';
 import 'package:flutter/material.dart';
 import 'package:bgu_course_grader/screens/my_reviews.dart';
@@ -6,23 +5,36 @@ import 'package:bgu_course_grader/screens/courses_list.dart';
 import 'package:bgu_course_grader/screens/contact_us.dart';
 import 'package:bgu_course_grader/screens/advanced_search.dart';
 
-
 class Menu extends StatelessWidget {
-
-
-  void _navigator(int index, BuildContext context){
-
-    List<Function> targets= [
-          () => Navigator.push(context, MaterialPageRoute(builder: (context) =>CourseList(favorites: true ,filtered: false, finalExam: false,))),
-          () => Navigator.push(context, MaterialPageRoute(builder: (context) => AdvancedSearch())),
-          () => Navigator.push(context, MaterialPageRoute(builder: (context) =>MyReviews())),
-          () => Navigator.push(context, MaterialPageRoute(builder: (context) => CourseList(favorites: false ,filtered: false, finalExam: false,))),
-          () => Navigator.push(context, MaterialPageRoute(builder: (context) => ContactUs())),
-          () => Navigator.push(context, MaterialPageRoute(builder: (context) => SettingsMenu()))
+  void _navigator(int index, BuildContext context) {
+    List<Function> targets = [
+      () => Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => CourseList(
+                    favorites: true,
+                    filtered: false,
+                    finalExam: false,
+                  ))),
+      () => Navigator.push(
+          context, MaterialPageRoute(builder: (context) => AdvancedSearch())),
+      () => Navigator.push(
+          context, MaterialPageRoute(builder: (context) => MyReviews())),
+      () => Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => CourseList(
+                    favorites: false,
+                    filtered: false,
+                    finalExam: false,
+                  ))),
+      () => Navigator.push(
+          context, MaterialPageRoute(builder: (context) => ContactUs())),
+      () => Navigator.push(
+          context, MaterialPageRoute(builder: (context) => SettingsMenu()))
     ];
     targets[index].call();
   }
-
 
 //   @override
 //   Widget build(BuildContext context) {
@@ -59,56 +71,63 @@ class Menu extends StatelessWidget {
     return Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.orange[100],
-        body: Directionality(textDirection: TextDirection.rtl, child: GridView.count(
-            crossAxisCount: 2,
-            children: <Widget>[buildCardWithIcon(Icons.search_outlined,
-              context,
-                  () {
-                _navigator(1, context);
-              },
-              "חיפוש מתקדם",
-            ),
-              buildCardWithIcon(Icons.rate_review_sharp,
+        body: Directionality(
+          textDirection: TextDirection.rtl,
+          child: Container(
+            padding: EdgeInsets.only(top: 40),
+            child: GridView.count(crossAxisCount: 2, children: <Widget>[
+              buildCardWithIcon(
+                Icons.search_outlined,
                 context,
-                    () {
+                () {
+                  _navigator(1, context);
+                },
+                "חיפוש מתקדם",
+              ),
+              buildCardWithIcon(
+                Icons.rate_review_sharp,
+                context,
+                () {
                   _navigator(2, context);
                 },
                 "הביקורות שלי",
               ),
-              buildCardWithIcon(Icons.list_alt,
+              buildCardWithIcon(
+                Icons.list_alt,
                 context,
-                    () {
+                () {
                   _navigator(3, context);
                 },
                 "רשימת קורסים",
               ),
-              buildCardWithIcon(Icons.favorite_outlined,
+              buildCardWithIcon(
+                Icons.favorite_outlined,
                 context,
-                    () {
+                () {
                   _navigator(0, context);
                 },
                 "מועדפים",
               ),
-              buildCardWithIcon(Icons.hearing_outlined,
+              buildCardWithIcon(
+                Icons.hearing_outlined,
                 context,
-                    () {
-                      _navigator(4, context);
+                () {
+                  _navigator(4, context);
                 },
                 "צרו קשר",
               ),
-              buildCardWithIcon(Icons.settings,
+              buildCardWithIcon(
+                Icons.settings,
                 context,
-                    () {
+                () {
                   _navigator(5, context);
                 },
                 "הגדרות",
               ),
-
-            ]
-        ),
+            ]),
+          ),
         ));
   }
-
 
   //     ListView.builder(
   //       itemCount: 5,
@@ -132,8 +151,8 @@ class Menu extends StatelessWidget {
 //   }
 // }
 
-  Padding buildCardWithIcon(IconData icon, context, VoidCallback onTap,
-      String pageName) {
+  Padding buildCardWithIcon(
+      IconData icon, context, VoidCallback onTap, String pageName) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
@@ -141,7 +160,7 @@ class Menu extends StatelessWidget {
         child: Card(
           elevation: 8,
           shape:
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           child: Container(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
