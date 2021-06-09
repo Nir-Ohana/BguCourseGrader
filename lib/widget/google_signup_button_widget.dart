@@ -1,10 +1,24 @@
 import 'package:bgu_course_grader/provider/google_sign_in.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 class GoogleSignupButtonWidget extends StatelessWidget {
+  final _firestore = FirebaseFirestore.instance;
+  final _auth = FirebaseAuth.instance;
+  User loggedInUser;
+
+  void getCurrentUser() async {
+    try {
+      final user = _auth.currentUser;
+      if (user != null) loggedInUser = user;
+    } catch (e) {
+      print(e);
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -14,6 +28,8 @@ class GoogleSignupButtonWidget extends StatelessWidget {
           final provider =
               Provider.of<GoogleSignInProvider>(context, listen: false);
           provider.login();
+
+
         },
         icon: FaIcon(FontAwesomeIcons.google, color: Colors.black),
         label: Directionality(

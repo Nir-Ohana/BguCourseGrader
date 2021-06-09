@@ -173,8 +173,9 @@ class Profile extends StatelessWidget {
                       ),
                       image: DecorationImage(
                           image: NetworkImage(
-                              "https://media-exp3.licdn.com/dms/image/C4E1BAQGmtS3y6bCq9Q/company-background_10000/0/1620628570580?e=2159024400&v=beta&t=GjML-7lAqvBt5wG6W5ow8Razyh4CZaflxOlpiyqWmYA"),
-                      fit: BoxFit.fill)
+                              "https://imgur.com/0FrdmOo.jpg"),
+                      fit: BoxFit.fill
+                      )
                     ),
                     child: Column(
                         children: [

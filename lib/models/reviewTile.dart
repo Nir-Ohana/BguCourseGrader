@@ -26,7 +26,7 @@ class ReviewTile extends StatelessWidget {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => Profile(userName)));
               },
-              leading: ClipOval(child: Image.network(photo)),
+              leading: ClipOval(child: Image.network(photo)!=null?Image.network(photo): Image.network("https://cdn3.iconfinder.com/data/icons/users-outline/60/50_-Blank_Profile-_user_people_group_team-512.png")),
               title: Text(
                 userName,
                 textDirection: TextDirection.rtl,
