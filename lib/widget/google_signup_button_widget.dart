@@ -1,5 +1,5 @@
 import 'package:bgu_course_grader/provider/google_sign_in.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 class GoogleSignupButtonWidget extends StatelessWidget {
-  final _firestore = FirebaseFirestore.instance;
+
   final _auth = FirebaseAuth.instance;
   User loggedInUser;
 
@@ -37,7 +37,7 @@ class GoogleSignupButtonWidget extends StatelessWidget {
           child: Text(
             'התחברו עם משתמש ה- BGU שלכם',
             style: TextStyle(
-                fontWeight: FontWeight.bold, fontSize: 20, color: Colors.black),
+                fontWeight: FontWeight.bold, fontSize: 10, color: Colors.black),
           ),
         ),
         style: OutlinedButton.styleFrom(
