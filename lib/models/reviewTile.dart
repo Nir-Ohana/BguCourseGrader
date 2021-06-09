@@ -1,19 +1,16 @@
 import 'package:bgu_course_grader/models/show_profile.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-
-
 class ReviewTile extends StatelessWidget {
-
   final String userName;
   final String reviewContent;
   final String time;
+  final String photo;
 
-  ReviewTile({this.userName, this.reviewContent, this.time});
-
-
-
-
+  ReviewTile({this.userName, this.reviewContent, this.time, this.photo});
 
   @override
   Widget build(BuildContext context) {
@@ -27,12 +24,22 @@ class ReviewTile extends StatelessWidget {
             ListTile(
               onLongPress: () {
                 Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => Profile(userName)));
+                    MaterialPageRoute(builder: (context) => Profile(userName)));
               },
-              title: Text(userName),
-              subtitle: Text(reviewContent),
+              leading: ClipOval(child: Image.network(photo)),
+              title: Text(
+                userName,
+                textDirection: TextDirection.rtl,
+              ),
+              subtitle: Text(
+                reviewContent,
+                textDirection: TextDirection.rtl,
+              ),
             ),
-            Text(time)
+            Text(
+              time,
+              textDirection: TextDirection.rtl,
+            )
           ],
         ),
       ),

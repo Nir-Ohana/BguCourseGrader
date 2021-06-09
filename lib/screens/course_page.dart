@@ -24,6 +24,7 @@ class CoursePage extends StatefulWidget {
 
 class _CoursePageState extends State<CoursePage> {
   final messageController = TextEditingController();
+  final _firebaseauth_instance = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +53,9 @@ class _CoursePageState extends State<CoursePage> {
                   ),
                 ),
                 Text(
-                  widget.credit_point.isNotEmpty ? 'נק"ז:\n\ ${widget.credit_point}\n' : 'נק"ז: \nיא אללה אין נק"ז ?\n',
+                  widget.credit_point.isNotEmpty
+                      ? 'נק"ז:\n\ ${widget.credit_point}\n'
+                      : 'נק"ז: \nיא אללה אין נק"ז ?\n',
                   textDirection: TextDirection.rtl,
                   style: TextStyle(
                     fontSize: 20,
@@ -106,38 +109,46 @@ class _CoursePageState extends State<CoursePage> {
                                           // you'd often call a server or save the information in a database.
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(SnackBar(
-                                                  content:
-                                                      Text('Processing Data')));
+                                                  content: Text(
+                                            'מעלה ביקורת...',
+                                            textDirection: TextDirection.rtl,
+                                          )));
                                           FirebaseFirestore.instance
                                               .collection("Reviews")
                                               .doc(widget.course_number +
                                                   " " +
-                                                  FirebaseAuth.instance
+                                                  _firebaseauth_instance
                                                       .currentUser.displayName)
                                               .set({
                                                 'time':
                                                     DateTime.now().toString(),
-                                                'name': FirebaseAuth.instance
+                                                'name': _firebaseauth_instance
                                                     .currentUser.displayName,
                                                 'course_name':
                                                     widget.course_name,
-                                                'email': FirebaseAuth
-                                                    .instance.currentUser.email,
+                                                'email': _firebaseauth_instance
+                                                    .currentUser.email,
                                                 'review_content':
                                                     messageController.text,
                                                 'course_number':
-                                                    widget.course_number
+                                                    widget.course_number,
+                                                'user_photo':
+                                                    _firebaseauth_instance
+                                                        .currentUser.photoURL,
                                               })
                                               .then((_) =>
                                                   ScaffoldMessenger.of(context)
                                                       .showSnackBar(SnackBar(
                                                           content: Text(
-                                                              'Thank you for your Review !'))))
-                                              .catchError((_) =>
-                                                  ScaffoldMessenger.of(context)
-                                                      .showSnackBar(SnackBar(
-                                                          content: Text(
-                                                              'Ya Walli, we have a problem.'))));
+                                                    'סחתיין עליך !',
+                                                    textDirection:
+                                                        TextDirection.rtl,
+                                                  ))))
+                                              .catchError((_) => ScaffoldMessenger
+                                                      .of(context)
+                                                  .showSnackBar(SnackBar(
+                                                      content: Text(
+                                                          'Ya Walli, we have a problem.'))));
 
                                           int count = 0;
                                           Navigator.popUntil(context, (route) {
@@ -156,7 +167,14 @@ class _CoursePageState extends State<CoursePage> {
                   ),
                 ),
                 ElevatedButton(
-                    onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => CourseReviews(courseName: widget.course_name,)));},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => CourseReviews(
+                                    courseName: widget.course_name,
+                                  )));
+                    },
                     child: const Text("לחץ על מנת לראות ביקורות לקורס זה",
                         style: TextStyle(color: Colors.black))),
               ],

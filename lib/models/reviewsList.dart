@@ -14,7 +14,6 @@ class reviewsList extends StatelessWidget {
 
   
   final _firestore = FirebaseFirestore.instance;
-  final loggedInUser = FirebaseAuth.instance.currentUser;
   final String courseName;
   reviewsList({this.courseName});
 
@@ -31,8 +30,9 @@ class reviewsList extends StatelessWidget {
             if(review['course_name'] == this.courseName){
               final String userName = review['name'];
               final String content = review['review_content'];
+              final String photo = review['user_photo'];
               final String formatted = formatter.format(DateTime.parse(review['time']));
-              reviewTiles.add(ReviewTile(userName: userName, reviewContent: content, time: formatted));
+              reviewTiles.add(ReviewTile(userName: userName, reviewContent: content, time: formatted, photo: photo,));
             }
           }
           return ListView(

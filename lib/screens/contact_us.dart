@@ -105,7 +105,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                     // If the form is valid, display a snackbar. In the real world,
                     // you'd often call a server or save the information in a database.
                     ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Processing Data')));
+                        SnackBar(content:  Text('מאבד את הנתונים...', textDirection:TextDirection.rtl,)));
                     firestore_instance
                         .collection("ContactUs").doc(user.displayName)
                         .set({
@@ -116,7 +116,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                         .then((_) => ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                                 content:
-                                    Text('Thank you for your feedback !'))))
+                                    Text('סחתיין עליך !', textDirection: TextDirection.rtl,))))
                         .catchError((_) => ScaffoldMessenger.of(context)
                             .showSnackBar(SnackBar(
                                 content:
