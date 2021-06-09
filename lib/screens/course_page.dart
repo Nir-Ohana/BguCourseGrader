@@ -2,9 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import 'course_reviews.dart';
-
 
 class CoursePage extends StatefulWidget {
   final String course_name;
@@ -37,7 +37,7 @@ class _CoursePageState extends State<CoursePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.orange[600],
+      backgroundColor: Colors.orangeAccent[100],
       body: Center(
         child: Container(
           padding: EdgeInsets.all(10),
@@ -80,12 +80,39 @@ class _CoursePageState extends State<CoursePage> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
+                SizedBox(
+                  height: 10,
+                ),
+                Center(
+                  child: RatingBarIndicator(
+                    rating: 2.45,
+                    itemBuilder: (context, index) => Icon(
+                      Icons.star,
+                      color: Colors.amber,
+                    ),
+                    itemCount: 5,
+                    itemSize: 50.0,
+                    direction: Axis.horizontal,
+                  ),
+                ),
+                // Text(
+                //   'דירוג: ',
+                //   textDirection: TextDirection.rtl,
+                //   style: TextStyle(
+                //     fontSize: 20,
+                //     fontWeight: FontWeight.bold,
+                //   ),
+                // ),
+                SizedBox(
+                  height: 10,
+                ),
                 ElevatedButton(
                   onPressed: () {
                     showDialog(
                         context: context,
-                        builder: (BuildContext context) => SingleChildScrollView(
-                          child: AlertDialog(
+                        builder: (BuildContext context) =>
+                            SingleChildScrollView(
+                              child: AlertDialog(
                                 title: const Text(
                                   'השאר ביקורת',
                                   textDirection: TextDirection.rtl,
@@ -103,12 +130,29 @@ class _CoursePageState extends State<CoursePage> {
                                         },
                                         controller: messageController,
                                         decoration: const InputDecoration(
-                                          icon: const Icon(Icons.question_answer),
+                                          icon:
+                                              const Icon(Icons.question_answer),
                                           hintText: '? מה אומר',
                                           labelText: 'הביקורת שלך כאן',
                                         ),
                                         maxLines: null,
                                       ),
+                                  RatingBar.builder(
+                                    initialRating: 3,
+                                    minRating: 1,
+                                    direction: Axis.horizontal,
+                                    allowHalfRating: true,
+                                    itemCount: 5,
+                                    itemSize: 10,
+                                    itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                                    itemBuilder: (context, _) => Icon(
+                                      Icons.star,
+                                      color: Colors.amber,
+                                    ),
+                                    onRatingUpdate: (rating) {
+                                      print(rating);
+                                    },
+                                  ),
                                       Container(
                                         padding: const EdgeInsets.only(
                                             left: 150.0, top: 40.0),
@@ -141,8 +185,9 @@ class _CoursePageState extends State<CoursePage> {
                                                       .currentUser.displayName,
                                                   'course_name':
                                                       widget.course_name,
-                                                  'email': _firebaseauth_instance
-                                                      .currentUser.email,
+                                                  'email':
+                                                      _firebaseauth_instance
+                                                          .currentUser.email,
                                                   'review_content':
                                                       messageController.text,
                                                   'course_number':
@@ -155,7 +200,8 @@ class _CoursePageState extends State<CoursePage> {
                                                                 context)
                                                             .showSnackBar(
                                                                 SnackBar(
-                                                                    content: Text(
+                                                                    content:
+                                                                        Text(
                                                           'סחתיין עליך !',
                                                           textDirection:
                                                               TextDirection //TODO WE REMOVED CATCH ERROR FROM HERE
@@ -175,7 +221,7 @@ class _CoursePageState extends State<CoursePage> {
                                   ),
                                 ),
                               ),
-                        ));
+                            ));
                   },
                   child: const Text(
                     "לחץ להשארת ביקורת",

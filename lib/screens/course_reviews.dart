@@ -21,11 +21,8 @@ class CourseReviews extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.orange[300],
-      body: Directionality(
-        textDirection: TextDirection.rtl,
-        child: Container(
-          child: reviewsList(courseName: courseName,)
-        ),
+      body: Container(
+        child: reviewsList(courseName: courseName,)
       ),
 
 
