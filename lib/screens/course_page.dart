@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'course_reviews.dart';
-import 'menu/menu_screen.dart';
+
 
 class CoursePage extends StatefulWidget {
   final String course_name;
@@ -84,96 +84,98 @@ class _CoursePageState extends State<CoursePage> {
                   onPressed: () {
                     showDialog(
                         context: context,
-                        builder: (BuildContext context) => AlertDialog(
-                              title: const Text(
-                                'השאר ביקורת',
-                                textDirection: TextDirection.rtl,
-                              ),
-                              content: Form(
-                                key: _formKey,
-                                child: Column(
-                                  children: [
-                                    TextFormField(
-                                      validator: (value) {
-                                        if (value == null || value.isEmpty) {
-                                          return 'Please enter some text';
-                                        }
-                                        return null;
-                                      },
-                                      controller: messageController,
-                                      decoration: const InputDecoration(
-                                        icon: const Icon(Icons.question_answer),
-                                        hintText: '? מה אומר',
-                                        labelText: 'הביקורת שלך כאן',
+                        builder: (BuildContext context) => SingleChildScrollView(
+                          child: AlertDialog(
+                                title: const Text(
+                                  'השאר ביקורת',
+                                  textDirection: TextDirection.rtl,
+                                ),
+                                content: Form(
+                                  key: _formKey,
+                                  child: Column(
+                                    children: [
+                                      TextFormField(
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return 'Please enter some text';
+                                          }
+                                          return null;
+                                        },
+                                        controller: messageController,
+                                        decoration: const InputDecoration(
+                                          icon: const Icon(Icons.question_answer),
+                                          hintText: '? מה אומר',
+                                          labelText: 'הביקורת שלך כאן',
+                                        ),
+                                        maxLines: null,
                                       ),
-                                      maxLines: null,
-                                    ),
-                                    Container(
-                                      padding: const EdgeInsets.only(
-                                          left: 150.0, top: 40.0),
-                                      child: new ElevatedButton(
-                                          onPressed: () {
-                                            FocusScope.of(context).unfocus();
-                                            // Validate returns true if the form is valid, or false otherwise.
-                                            // If the form is valid, display a snackbar. In the real world,
-                                            // you'd often call a server or save the information in a database.
-                                            if (_formKey.currentState
-                                                .validate()) {
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(SnackBar(
-                                                      content: Text(
-                                                'מעלה ביקורת...',
-                                                textDirection:
-                                                    TextDirection.rtl,
-                                              )));
-                                              FirebaseFirestore.instance
-                                                  .collection("Reviews")
-                                                  .doc(widget.course_number +
-                                                      " " +
+                                      Container(
+                                        padding: const EdgeInsets.only(
+                                            left: 150.0, top: 40.0),
+                                        child: new ElevatedButton(
+                                            onPressed: () {
+                                              FocusScope.of(context).unfocus();
+                                              // Validate returns true if the form is valid, or false otherwise.
+                                              // If the form is valid, display a snackbar. In the real world,
+                                              // you'd often call a server or save the information in a database.
+                                              if (_formKey.currentState
+                                                  .validate()) {
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(SnackBar(
+                                                        content: Text(
+                                                  'מעלה ביקורת...',
+                                                  textDirection:
+                                                      TextDirection.rtl,
+                                                )));
+                                                FirebaseFirestore.instance
+                                                    .collection("Reviews")
+                                                    .doc(widget.course_number +
+                                                        " " +
+                                                        _firebaseauth_instance
+                                                            .currentUser
+                                                            .displayName)
+                                                    .set({
+                                                  'time':
+                                                      DateTime.now().toString(),
+                                                  'name': _firebaseauth_instance
+                                                      .currentUser.displayName,
+                                                  'course_name':
+                                                      widget.course_name,
+                                                  'email': _firebaseauth_instance
+                                                      .currentUser.email,
+                                                  'review_content':
+                                                      messageController.text,
+                                                  'course_number':
+                                                      widget.course_number,
+                                                  'user_photo':
                                                       _firebaseauth_instance
-                                                          .currentUser
-                                                          .displayName)
-                                                  .set({
-                                                'time':
-                                                    DateTime.now().toString(),
-                                                'name': _firebaseauth_instance
-                                                    .currentUser.displayName,
-                                                'course_name':
-                                                    widget.course_name,
-                                                'email': _firebaseauth_instance
-                                                    .currentUser.email,
-                                                'review_content':
-                                                    messageController.text,
-                                                'course_number':
-                                                    widget.course_number,
-                                                'user_photo':
-                                                    _firebaseauth_instance
-                                                        .currentUser.photoURL,
-                                              }).then((_) =>
-                                                      ScaffoldMessenger.of(
-                                                              context)
-                                                          .showSnackBar(
-                                                              SnackBar(
-                                                                  content: Text(
-                                                        'סחתיין עליך !',
-                                                        textDirection:
-                                                            TextDirection //TODO WE REMOVED CATCH ERROR FROM HERE
-                                                                .rtl,
-                                                      ))));
+                                                          .currentUser.photoURL,
+                                                }).then((_) =>
+                                                        ScaffoldMessenger.of(
+                                                                context)
+                                                            .showSnackBar(
+                                                                SnackBar(
+                                                                    content: Text(
+                                                          'סחתיין עליך !',
+                                                          textDirection:
+                                                              TextDirection //TODO WE REMOVED CATCH ERROR FROM HERE
+                                                                  .rtl,
+                                                        ))));
 
-                                              int count = 0;
-                                              Navigator.popUntil(context,
-                                                  (route) {
-                                                return count++ == 3;
-                                              });
-                                            }
-                                          },
-                                          child: const Text('שלחחחח')),
-                                    ),
-                                  ],
+                                                int count = 0;
+                                                Navigator.popUntil(context,
+                                                    (route) {
+                                                  return count++ == 3;
+                                                });
+                                              }
+                                            },
+                                            child: const Text('שלחחחח')),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ));
+                        ));
                   },
                   child: const Text(
                     "לחץ להשארת ביקורת",
