@@ -1,7 +1,7 @@
 
 import 'package:bgu_course_grader/models/favoritesList.dart';
 import 'package:flutter/material.dart';
-import 'package:bgu_course_grader/models/appBar.dart';
+
 import 'package:bgu_course_grader/models/courseList.dart';
 
 
@@ -31,7 +31,6 @@ class _CourseListState extends State<CourseList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(),
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.orange[100],
       body: Directionality(

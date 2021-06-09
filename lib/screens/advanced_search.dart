@@ -1,4 +1,4 @@
-import 'package:bgu_course_grader/models/appBar.dart';
+
 import 'package:bgu_course_grader/models/inputDec.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -36,9 +36,8 @@ class _AdvancedSearchState extends State<AdvancedSearch> {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.orange[100],
-        appBar: MyAppBar(),
         body: Container(
-          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 50),
+          padding: EdgeInsets.symmetric(vertical: 50, horizontal: 50),
           child: Directionality(
             textDirection: TextDirection.rtl,
             child: Form(

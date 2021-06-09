@@ -1,4 +1,4 @@
-import 'package:bgu_course_grader/models/appBar.dart';
+
 import 'package:bgu_course_grader/models/reviewsList.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +19,6 @@ class CourseReviews extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(),
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.orange[300],
       body: Directionality(

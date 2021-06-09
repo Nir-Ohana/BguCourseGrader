@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:bgu_course_grader/models/appBar.dart';
+
 
 import 'menu/menu_screen.dart';
 
@@ -14,7 +14,6 @@ class ContactUs extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: appTitle,
       home: Scaffold(
-        appBar: MyAppBar(),
         body: MyCustomForm(),
       ),
     );

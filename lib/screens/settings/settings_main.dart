@@ -1,4 +1,4 @@
-import 'package:bgu_course_grader/models/appBar.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +13,7 @@ class _SettingsPageState extends State<SettingsMenu> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(),
+
       body: Directionality(textDirection: TextDirection.rtl, child: Container(
         padding: EdgeInsets.only(left: 16, top: 25, right: 16),
         child: ListView(

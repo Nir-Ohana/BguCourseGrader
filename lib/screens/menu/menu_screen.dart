@@ -1,4 +1,5 @@
-import 'package:bgu_course_grader/models/appBar.dart';
+
+import 'package:bgu_course_grader/screens/settings/settings_main.dart';
 import 'package:flutter/material.dart';
 import 'package:bgu_course_grader/screens/my_reviews.dart';
 import 'package:bgu_course_grader/screens/courses_list.dart';
@@ -16,7 +17,8 @@ class Menu extends StatelessWidget {
           () => Navigator.push(context, MaterialPageRoute(builder: (context) => AdvancedSearch())),
           () => Navigator.push(context, MaterialPageRoute(builder: (context) =>MyReviews())),
           () => Navigator.push(context, MaterialPageRoute(builder: (context) => CourseList(favorites: false ,filtered: false, finalExam: false,))),
-          () => Navigator.push(context, MaterialPageRoute(builder: (context) => ContactUs()))
+          () => Navigator.push(context, MaterialPageRoute(builder: (context) => ContactUs())),
+          () => Navigator.push(context, MaterialPageRoute(builder: (context) => SettingsMenu()))
     ];
     targets[index].call();
   }
@@ -57,7 +59,6 @@ class Menu extends StatelessWidget {
     return Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.orange[100],
-        appBar: MyAppBar(),
         body: Directionality(textDirection: TextDirection.rtl, child: GridView.count(
             crossAxisCount: 2,
             children: <Widget>[buildCardWithIcon(Icons.search_outlined,
@@ -94,7 +95,15 @@ class Menu extends StatelessWidget {
                       _navigator(4, context);
                 },
                 "צרו קשר",
-              )
+              ),
+              buildCardWithIcon(Icons.settings,
+                context,
+                    () {
+                  _navigator(5, context);
+                },
+                "הגדרות",
+              ),
+
             ]
         ),
         ));
