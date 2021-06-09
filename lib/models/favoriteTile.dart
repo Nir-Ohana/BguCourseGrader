@@ -1,3 +1,4 @@
+import 'package:bgu_course_grader/screens/course_page.dart';
 import 'package:flutter/material.dart';
 import 'course.dart';
 
@@ -14,6 +15,18 @@ class FavoriteTile extends StatelessWidget {
       child: Card(
         margin: EdgeInsets.fromLTRB(20, 6, 20, 0),
         child: ListTile(
+        onLongPress: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      CoursePage(
+                        course_name: course.name,
+                        course_number: course.courseNumber,
+                        credit_point: course.credits,
+                        course_summary: course.courseSummary,
+                      )));
+        },
           title: Text(
             '${course.name}\n',
             textDirection: TextDirection.rtl,
