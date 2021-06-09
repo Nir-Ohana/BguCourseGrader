@@ -25,7 +25,7 @@ class reviewsList extends StatelessWidget {
         List<ReviewTile> reviewTiles = [];
         if(snapshot.hasData) {
           final reviews = snapshot.data.docs;
-          final DateFormat formatter = DateFormat('dd-mm-yyyy');
+          final DateFormat formatter = DateFormat('dd-MM-yyyy');
           for(var review in reviews){
             if(review['course_name'] == this.courseName){
               final String userName = review['name'];
