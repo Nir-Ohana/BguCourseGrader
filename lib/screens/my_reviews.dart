@@ -124,7 +124,7 @@ class _MyReviewsState extends State<MyReviews> {
                       itemBuilder: (BuildContext context, index) {
                         return swiperItemsList.length!=0?swiperItemsList[index]: buildSwiperItem(
                             pics[index],
-                            "You do not have any reviews yet! Use this app wisely",
+                            "You do not have any reviews yet!",
                             colors[index],
                             gradients[index],
                             "WHAT ARE YOU WAITING FOR?!");
@@ -210,7 +210,28 @@ class _MyReviewsState extends State<MyReviews> {
 
   Widget buildSwiperItem(String image, String text, Color color,
       Gradient gradient, String endText) {
-    return Container(
+    return InkWell(
+        onTap: (){showDialog(
+        context: context,
+        builder: (BuildContext context) {return AlertDialog(
+          title: Text('הביקורת שלי',textDirection: TextDirection.rtl,style: TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.w500,
+            color: Colors.black,
+          ) ,
+          ),
+          content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+              Text(text,
+                  textDirection: TextDirection.rtl,
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.grey[600],
+                  )),]
+        ));});},
+        child:Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(6),
         boxShadow: [
@@ -268,13 +289,13 @@ class _MyReviewsState extends State<MyReviews> {
                 style: TextStyle(
                   color: Colors.black,
                   fontFamily: "Poppins",
-                  fontSize: 20,
+                  fontSize: 22,
                   fontStyle: FontStyle.normal,
                   fontWeight: FontWeight.w500,
                   letterSpacing: 1.3,
                 ),
                 textAlign: TextAlign.center,
-                overflow: TextOverflow.fade,
+                overflow: TextOverflow.ellipsis,
               ),
             ),
           ),
@@ -282,6 +303,7 @@ class _MyReviewsState extends State<MyReviews> {
             flex: 1,
             child: Text(
               endText,
+              overflow: TextOverflow.ellipsis ,
               style: TextStyle(
                 fontFamily: "Poppins",
                 color: Colors.orangeAccent[200],
@@ -291,7 +313,7 @@ class _MyReviewsState extends State<MyReviews> {
           ),
         ],
       ),
-    );
+    ));
   }
 }
 
