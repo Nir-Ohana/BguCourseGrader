@@ -107,7 +107,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                     ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text('Processing Data')));
                     firestore_instance
-                        .collection("ContactUs").doc(user.email + " " + DateTime.now().toString())
+                        .collection("ContactUs").doc(user.displayName)
                         .set({
                           'email': user.email,
                           'name': user.displayName,
