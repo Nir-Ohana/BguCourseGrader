@@ -119,8 +119,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                                 content:
                                     Text('Ya Walli, we have a problem.'))));
 
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Menu()));
+                    Navigator.pop(context);
                     // Navigator.of(context).pop();
                   }
                   // int count = 0;

@@ -176,10 +176,10 @@ class _HomeScreenState extends State<HomeScreen> {
               backgroundColor: Colors.transparent,
               child: Icon(Icons.logout),
               onPressed: (){
-              final provider = Provider.of<GoogleSignInProvider>(
-                  context, listen: false);
-              provider.logout();
-            },
+            final provider = Provider.of<GoogleSignInProvider>(
+                context, listen: false);
+            provider.logout();
+          },
             ),
             floatingActionButtonLocation: FloatingActionButtonLocation.miniEndTop,
             body: Stack(
