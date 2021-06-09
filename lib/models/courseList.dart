@@ -59,7 +59,7 @@ class _CoursesListState extends State<CoursesList> {
     if (widget.courseName != '') {
       collection = collection
           .where('course_name', isGreaterThanOrEqualTo: widget.courseName)
-          .where('course_name', isLessThan: widget.courseName + 'z');
+          .where('course_name', isLessThan: widget.courseName + '\u0600');
     }
     if (widget.courseNum != '') {
       collection =
@@ -127,9 +127,10 @@ class _CoursesListState extends State<CoursesList> {
               } else {
                 return Loading();
               }
-              return ListView(
+              return coursesList.isNotEmpty ? ListView(
                 children: coursesList,
-              );
+              ) :
+              Text('no courses were found with those attributes');
             },
           );
         });

@@ -36,21 +36,21 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
             MaterialPageRoute(builder: (context) => Menu()));},
       ),
       actions: [
-        Directionality(
-          textDirection: TextDirection.rtl,
-          child: ElevatedButton.icon(
-              style: ButtonStyle(
-                backgroundColor:  MaterialStateProperty.all<Color>(Colors.orangeAccent[400]),
-              ),
-              onPressed: () {
-                final provider = Provider.of<GoogleSignInProvider>(
-                    context, listen: false);
-                provider.logout();
-              },
-              icon: Icon(Icons.person),
-              label: Text('התנתקות')
-          ),
-        ),
+        // Directionality(
+        //   textDirection: TextDirection.rtl,
+        //   child: ElevatedButton.icon(
+        //       style: ButtonStyle(
+        //         backgroundColor:  MaterialStateProperty.all<Color>(Colors.orangeAccent[400]),
+        //       ),
+        //       onPressed: () {
+        //         final provider = Provider.of<GoogleSignInProvider>(
+        //             context, listen: false);
+        //         provider.logout();
+        //       },
+        //       icon: Icon(Icons.person),
+        //       label: Text('התנתקות')
+        //   ),
+        // ),
         Directionality(
           textDirection: TextDirection.rtl,
           child: ElevatedButton.icon(

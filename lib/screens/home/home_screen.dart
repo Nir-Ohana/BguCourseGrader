@@ -169,13 +169,13 @@ class _HomeScreenState extends State<HomeScreen> {
 //   });
 // }}
       return Scaffold(
-        body: Stack(
-          children: [
-            Column(
-              children: [
-                Expanded(
-                  flex: 5,
-                  child: Container(
+        body: SingleChildScrollView(
+          child: Stack(
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Container(
                     width: double.infinity,
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
@@ -213,11 +213,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         ]
                     ),
                   ),
-                ),
 
-                Expanded(
-                  flex: 5,
-                  child: Container(
+                  Container(
                     color: Colors.orange[100],
                     child: Center(
                         child: Card(
@@ -360,42 +357,41 @@ class _HomeScreenState extends State<HomeScreen> {
                         )
                     ),
                   ),
-                ),
-
-                )],
-            ),
-            Positioned(
-                top: MediaQuery
-                    .of(context)
-                    .size
-                    .height * 0.45,
-                left: 30.0,
-                right: 30.0,
-                child: InkWell(
-                child:
-                  Card(
-                    shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                    child: Padding(
-                      padding: EdgeInsets.all(23.0),
-                      child: Text(
-                          'לתפריט',
-                          style: TextStyle(
-                              color: Colors.deepOrangeAccent,
-                            fontSize: 20.0),
-                          textAlign: TextAlign.center
-                        )
+                  )],
+              ),
+              Positioned(
+                  top: MediaQuery
+                      .of(context)
+                      .size
+                      .height * 0.45,
+                  left: 30.0,
+                  right: 30.0,
+                  child: InkWell(
+                  child:
+                    Card(
+                      shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                      child: Padding(
+                        padding: EdgeInsets.all(23.0),
+                        child: Text(
+                            'לתפריט',
+                            style: TextStyle(
+                                color: Colors.deepOrangeAccent,
+                              fontSize: 20.0),
+                            textAlign: TextAlign.center
+                          )
       ),
-                      ),
+                        ),
 
-                        onTap: () {Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Menu()));
+                          onTap: () {Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => Menu()));
       }
       ),
-                )
-            ],
+                  )
+              ],
 
+          ),
         ),
       );
     });
