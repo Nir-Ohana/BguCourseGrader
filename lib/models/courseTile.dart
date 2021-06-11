@@ -46,56 +46,67 @@ class _CourseTileState extends State<CourseTile> {
                     'מספר קורס: ${widget.course.courseNumber}',
                     textDirection: TextDirection.rtl,
                   ),
-                  trailing: Icon(
-                    widget.favorite ? Icons.favorite : Icons.favorite_border,
-                    color: Colors.red,
+                  trailing: TextButton(
+
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
+                    ),
+                    onPressed: (){
+                      setState(() {
+                        widget.favorite = !widget.favorite;
+                        if (widget.favorite) {
+                          favorites.add(widget.course.name);
+                          firestore_instance
+                              .collection("Favorites")
+                              .doc(loggedUser.email)
+                              .set({'liked': favorites});
+                        } else {
+                          favorites.remove(widget.course.name);
+                          firestore_instance
+                              .collection("Favorites")
+                              .doc(loggedUser.email)
+                              .set({'liked': favorites});
+                        }
+                      });
+
+                    },
+                    child: Icon(
+                      widget.favorite ? Icons.favorite : Icons.favorite_border,
+                      color: Colors.red,
+                    ),
                   ),
                   tileColor: Colors.orange[400],
                   onTap: () {
-                    setState(() {
-                      widget.favorite = !widget.favorite;
-                      if (widget.favorite) {
-                        favorites.add(widget.course.name);
-                        firestore_instance
-                            .collection("Favorites")
-                            .doc(loggedUser.email)
-                            .set({'liked': favorites});
-                      } else {
-                        favorites.remove(widget.course.name);
-                        firestore_instance
-                            .collection("Favorites")
-                            .doc(loggedUser.email)
-                            .set({'liked': favorites});
-                      }
-                    });
-                  },
-                  onLongPress: () {
+
                     firestore_instance
                         .collection('course_popularity')
                         .doc(widget.course.courseNumber)
                         .get()
                         .then((snapshot) => {
-                              if (snapshot.exists)
-                                {
-                                  course_rating =
-                                      snapshot.data()['course_rating']
-                                }
-                            })
+                      if (snapshot.exists)
+                        {
+                          course_rating =
+                          snapshot.data()['course_rating']
+                        }
+                    })
                         .then((value) =>
                     {
                       Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                CoursePage(
-                                  course_name: widget.course.name,
-                                  course_number: widget.course.courseNumber,
-                                  credit_point: widget.course.credits,
-                                  course_summary:
-                                  widget.course.courseSummary,
-                                  course_page_rating: course_rating,
-                                )))
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  CoursePage(
+                                    course_name: widget.course.name,
+                                    course_number: widget.course.courseNumber,
+                                    credit_point: widget.course.credits,
+                                    course_summary:
+                                    widget.course.courseSummary,
+                                    course_page_rating: course_rating,
+                                  )))
                     });
+
+                  },
+                  onLongPress: () {
                   },
                 ),
               ),
