@@ -31,8 +31,9 @@ class reviewsList extends StatelessWidget {
               final String userName = review['name'];
               final String content = review['review_content'];
               final String photo = review['user_photo'];
+              final double user_rating = review['user_rating'];
               final String formatted = formatter.format(DateTime.parse(review['time']));
-              reviewTiles.add(ReviewTile(userName: userName, reviewContent: content, time: formatted, photo: photo,));
+              reviewTiles.add(ReviewTile(userName: userName, reviewContent: content, time: formatted, photo: photo, user_rating: user_rating,));
             }
           }
           return ListView(

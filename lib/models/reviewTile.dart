@@ -10,8 +10,14 @@ class ReviewTile extends StatelessWidget {
   final String reviewContent;
   final String time;
   final String photo;
+  final double user_rating;
 
-  ReviewTile({this.userName, this.reviewContent, this.time, this.photo});
+  ReviewTile(
+      {this.userName,
+      this.reviewContent,
+      this.time,
+      this.photo,
+      this.user_rating});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +33,11 @@ class ReviewTile extends StatelessWidget {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => Profile(userName)));
               },
-              trailing: ClipOval(child: Image.network(photo)!=null?Image.network(photo): Image.network("https://cdn3.iconfinder.com/data/icons/users-outline/60/50_-Blank_Profile-_user_people_group_team-512.png")),
+              trailing: ClipOval(
+                  child: Image.network(photo) != null
+                      ? Image.network(photo)
+                      : Image.network(
+                          "https://cdn3.iconfinder.com/data/icons/users-outline/60/50_-Blank_Profile-_user_people_group_team-512.png")),
               title: Text(
                 userName,
                 textDirection: TextDirection.rtl,
@@ -38,7 +48,7 @@ class ReviewTile extends StatelessWidget {
               ),
             ),
             RatingBarIndicator(
-              rating: 2.45,
+              rating: user_rating,
               itemBuilder: (context, index) => Icon(
                 Icons.star,
                 color: Colors.amber,
@@ -51,7 +61,6 @@ class ReviewTile extends StatelessWidget {
               time,
               textDirection: TextDirection.rtl,
             ),
-
           ],
         ),
       ),

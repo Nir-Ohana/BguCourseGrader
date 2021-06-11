@@ -1,7 +1,7 @@
-
 import 'package:bgu_course_grader/models/inputDec.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import 'courses_list.dart';
 
@@ -20,6 +20,7 @@ class _AdvancedSearchState extends State<AdvancedSearch> {
   bool finalExam = false;
   bool assignments = false;
   bool attendance = false;
+  double user_rating = 0;
 
   final _formKey = GlobalKey<FormState>();
 
@@ -82,9 +83,7 @@ class _AdvancedSearchState extends State<AdvancedSearch> {
                       // val.isEmpty ? 'Please enter an email' : null,
                       onChanged: (val) {
                         setState(() {
-
                           courseNum = val;
-
                         });
                       },
                     ),
@@ -97,26 +96,48 @@ class _AdvancedSearchState extends State<AdvancedSearch> {
                         setState(() {
                           finalExam = value;
                         });
-
                       },
                     ),
-                    Text('דירוג קורס: (בעתיד יהיו כוכבים לפי הדירוגת 1-5)'),
+                    RatingBar.builder(
+                      initialRating: 0,
+                      minRating: 1,
+                      direction: Axis.horizontal,
+                      allowHalfRating: true,
+                      itemCount: 5,
+                      itemSize: 30,
+                      itemPadding: EdgeInsets.symmetric(
+                          horizontal: 4.0),
+                      itemBuilder: (context, _) => Icon(
+                        Icons.star,
+                        color: Colors.amber,
+                      ),
+                      onRatingUpdate: (rating) {
+                        user_rating = rating; // new rating of the user
+                      },
+                    ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                       child: ElevatedButton(
                         style: ButtonStyle(
-                          backgroundColor:  MaterialStateProperty.all<Color>(Colors.orangeAccent[400]),
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              Colors.orangeAccent[400]),
                         ),
                         onPressed: () async {
-
-                          Navigator.push(context, MaterialPageRoute(builder: (context) =>
-                              CourseList(filtered: true, department: department,
-                                courseNum: courseNum, courseName: courseName, finalExam: finalExam, favorites: false,)));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => CourseList(
+                                      filtered: true,
+                                      department: department,
+                                      courseNum: courseNum,
+                                      courseName: courseName,
+                                      finalExam: finalExam,
+                                      favorites: false,
+                                      rating: user_rating)));
                         },
-                        child: Text('חפש',
-                          style: TextStyle(
-                              color: Colors.white
-                          ),
+                        child: Text(
+                          'חפש',
+                          style: TextStyle(color: Colors.white),
                         ),
                       ),
                     )
