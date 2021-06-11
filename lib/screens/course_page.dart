@@ -169,7 +169,8 @@ class _CoursePageState extends State<CoursePage> {
                                               color: Colors.amber,
                                             ),
                                             onRatingUpdate: (rating) {
-                                              user_rating = rating; // new rating of the user
+                                              user_rating =
+                                                  rating; // new rating of the user
                                             },
                                           ),
                                           Container(
@@ -194,77 +195,93 @@ class _CoursePageState extends State<CoursePage> {
                                                           TextDirection.rtl,
                                                     )));
                                                     _firestore_instance
-                                                        .collection("Reviews")
+                                                        .collection(
+                                                            'course_popularity') // checking if the popularity rating even exist
                                                         .doc(widget
-                                                                .course_number +
-                                                            " " +
-                                                            _firebaseauth_instance
-                                                                .currentUser
-                                                                .displayName)
-                                                        .set({
-                                                          'time': DateTime.now()
-                                                              .toString(),
-                                                          'name':
-                                                              _firebaseauth_instance
-                                                                  .currentUser
-                                                                  .displayName,
-                                                          'course_name': widget
-                                                              .course_name,
-                                                          'email':
-                                                              _firebaseauth_instance
-                                                                  .currentUser
-                                                                  .email,
-                                                          'review_content':
-                                                              messageController
-                                                                  .text,
-                                                          'course_number': widget
-                                                              .course_number,
-                                                          'user_rating':
-                                                              user_rating,
-                                                          'user_photo':
-                                                              _firebaseauth_instance
-                                                                  .currentUser
-                                                                  .photoURL,
-                                                        })
+                                                            .course_number)
+                                                        .get()
+                                                        .then(
+                                                            (popularitySnapshot) =>
+                                                                {
+                                                                  if (popularitySnapshot
+                                                                      .exists)
+                                                                    {
+                                                                      // if it exists we want to check if completely new review or an updated on by a user
+                                                                      _firestore_instance
+                                                                          .collection(
+                                                                              'Reviews')
+                                                                          .doc(widget.course_number +
+                                                                              " " +
+                                                                              _firebaseauth_instance.currentUser.displayName)
+                                                                          .get()
+                                                                          .then((reviewSnapshot) => {
+                                                                                if (reviewSnapshot.exists) // if the user already has a review
+                                                                                  {
+                                                                                    _firestore_instance.collection('course_popularity').doc(widget.course_number).update({
+                                                                                      'course_rating': (popularitySnapshot.data()['course_rating'] * popularitySnapshot.data()['num_reviews'] - old_rating + user_rating) / (popularitySnapshot.data()['num_reviews']),
+                                                                                      'num_reviews': popularitySnapshot.data()['num_reviews'],
+                                                                                    })
+                                                                                  }
+                                                                                else
+                                                                                  {
+                                                                                    _firestore_instance.collection('course_popularity').doc(widget.course_number).update({
+                                                                                      'course_rating': (popularitySnapshot.data()['course_rating'] * popularitySnapshot.data()['num_reviews'] + user_rating) / (popularitySnapshot.data()['num_reviews'] + 1),
+                                                                                      'num_reviews': popularitySnapshot.data()['num_reviews'] + 1,
+                                                                                    })
+                                                                                  }
+                                                                              })
+                                                                    }
+                                                                  else
+                                                                    {
+                                                                      _firestore_instance
+                                                                          .collection(
+                                                                              'course_popularity')
+                                                                          .doc(widget
+                                                                              .course_number)
+                                                                          .set({
+                                                                        'course_rating':
+                                                                            user_rating,
+                                                                        'num_reviews':
+                                                                            1,
+                                                                      })
+                                                                    }
+                                                                })
                                                         .then((_) =>
                                                             _firestore_instance
                                                                 .collection(
-                                                                    'course_popularity') // checking if the popularity rating even exist
+                                                                    "Reviews")
                                                                 .doc(widget
-                                                                    .course_number)
-                                                                .get()
-                                                                .then(
-                                                                    (popularitySnapshot) =>
-                                                                        {
-                                                                          if (popularitySnapshot
-                                                                              .exists)
-                                                                            {
-                                                                              // if it exists we want to check if completely new review or an updated on by a user
-                                                                              _firestore_instance.collection('Reviews').doc(widget.course_number + " " + _firebaseauth_instance.currentUser.displayName).get().then((reviewSnapshot) => {
-                                                                                    if (reviewSnapshot.exists) // if the user already has a review
-                                                                                      {
-                                                                                        _firestore_instance.collection('course_popularity').doc(widget.course_number).update({
-                                                                                          'course_rating': (popularitySnapshot.data()['course_rating'] * popularitySnapshot.data()['num_reviews'] - old_rating + user_rating) / (popularitySnapshot.data()['num_reviews']),
-                                                                                          'num_reviews': popularitySnapshot.data()['num_reviews'],
-                                                                                        })
-                                                                                      }
-                                                                                    else
-                                                                                      {
-                                                                                        _firestore_instance.collection('course_popularity').doc(widget.course_number).update({
-                                                                                          'course_rating': (popularitySnapshot.data()['course_rating'] * popularitySnapshot.data()['num_reviews'] + user_rating) / (popularitySnapshot.data()['num_reviews'] + 1),
-                                                                                          'num_reviews': popularitySnapshot.data()['num_reviews'] + 1,
-                                                                                        })
-                                                                                      }
-                                                                                  })
-                                                                            }
-                                                                          else
-                                                                            {
-                                                                              _firestore_instance.collection('course_popularity').doc(widget.course_number).set({
-                                                                                'course_rating': user_rating,
-                                                                                'num_reviews': 1,
-                                                                              })
-                                                                            }
-                                                                        }))
+                                                                        .course_number +
+                                                                    " " +
+                                                                    _firebaseauth_instance
+                                                                        .currentUser
+                                                                        .displayName)
+                                                                .set({
+                                                              'time': DateTime
+                                                                      .now()
+                                                                  .toString(),
+                                                              'name': _firebaseauth_instance
+                                                                  .currentUser
+                                                                  .displayName,
+                                                              'course_name': widget
+                                                                  .course_name,
+                                                              'email':
+                                                                  _firebaseauth_instance
+                                                                      .currentUser
+                                                                      .email,
+                                                              'review_content':
+                                                                  messageController
+                                                                      .text,
+                                                              'course_number':
+                                                                  widget
+                                                                      .course_number,
+                                                              'user_rating':
+                                                                  user_rating,
+                                                              'user_photo':
+                                                                  _firebaseauth_instance
+                                                                      .currentUser
+                                                                      .photoURL,
+                                                            }))
                                                         .then((_) =>
                                                             ScaffoldMessenger
                                                                     .of(context)
