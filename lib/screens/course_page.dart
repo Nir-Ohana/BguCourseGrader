@@ -49,6 +49,7 @@ class _CoursePageState extends State<CoursePage> {
           child: SafeArea(
             child: ListView(
               children: [
+                SizedBox(height: 30,),
                 Text(
                   'שם הקורס:\n ${widget.course_name}\n',
                   textDirection: TextDirection.rtl,
@@ -61,7 +62,7 @@ class _CoursePageState extends State<CoursePage> {
                   'מספר הקורס:\n ${widget.course_number}\n',
                   textDirection: TextDirection.rtl,
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -71,7 +72,7 @@ class _CoursePageState extends State<CoursePage> {
                       : 'נק"ז: \nיא אללה אין נק"ז ?\n',
                   textDirection: TextDirection.rtl,
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -81,7 +82,7 @@ class _CoursePageState extends State<CoursePage> {
                       : 'תקציר: \nוואלה אין תקציר...',
                   textDirection: TextDirection.rtl,
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -115,7 +116,13 @@ class _CoursePageState extends State<CoursePage> {
                 SizedBox(
                   height: 10,
                 ),
-                ElevatedButton(
+            Card(
+              elevation: 3,
+              color: Color(0xE6FFFFFF),
+              shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+              child: TextButton(
+                style: TextButton.styleFrom(primary: Colors.white),
                   onPressed: () {
                     // see if a review from this user already exists if so -> save his old rating
                     _firestore_instance
@@ -301,8 +308,14 @@ class _CoursePageState extends State<CoursePage> {
                     "השארת ביקורת",
                     style: TextStyle(color: Colors.black),
                   ),
-                ),
-                ElevatedButton(
+                )),
+              Card(
+              elevation: 3,
+              color: Color(0xE6FFFFFF),
+              shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+              child:TextButton(
+                style: TextButton.styleFrom(primary: Colors.white),
                     onPressed: () {
                       Navigator.push(
                           context,
@@ -312,8 +325,8 @@ class _CoursePageState extends State<CoursePage> {
                                   )));
                     },
                     child: const Text("ביקורות לקורס זה",
-                        style: TextStyle(color: Colors.black))),
-              ],
+                        style: TextStyle(color: Colors.black,))),
+              )],
             ),
           ),
         ),

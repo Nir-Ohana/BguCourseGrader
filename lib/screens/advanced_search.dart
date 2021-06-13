@@ -45,6 +45,16 @@ class _AdvancedSearchState extends State<AdvancedSearch> {
                 key: _formKey,
                 child: Column(
                   children: [
+                    SizedBox(height: 20,),
+                    Text("חיפוש מתקדם",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+
+
+
+                    ),),
+                    SizedBox(height: 50,),
                     TextFormField(
                       decoration: textInputDecoration.copyWith(
                           hintText:

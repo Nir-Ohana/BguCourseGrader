@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:bgu_course_grader/models/course.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CourseTile extends StatefulWidget {
   final Course course;
@@ -33,50 +34,10 @@ class _CourseTileState extends State<CourseTile> {
                 favorites = user['liked'];
               }
             }
-            return Padding(
-              padding: EdgeInsets.only(top: 8),
-              child: Card(
-                margin: EdgeInsets.fromLTRB(20, 6, 20, 0),
-                child: ListTile(
-                  title: Text(
-                    '${widget.course.name}\n',
-                    textDirection: TextDirection.rtl,
-                  ),
-                  subtitle: Text(
-                    'מספר קורס: ${widget.course.courseNumber}',
-                    textDirection: TextDirection.rtl,
-                  ),
-                  trailing: TextButton(
-
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
-                    ),
-                    onPressed: (){
-                      setState(() {
-                        widget.favorite = !widget.favorite;
-                        if (widget.favorite) {
-                          favorites.add(widget.course.name);
-                          firestore_instance
-                              .collection("Favorites")
-                              .doc(loggedUser.email)
-                              .set({'liked': favorites});
-                        } else {
-                          favorites.remove(widget.course.name);
-                          firestore_instance
-                              .collection("Favorites")
-                              .doc(loggedUser.email)
-                              .set({'liked': favorites});
-                        }
-                      });
-
-                    },
-                    child: Icon(
-                      widget.favorite ? Icons.favorite : Icons.favorite_border,
-                      color: Colors.red,
-                    ),
-                  ),
-                  tileColor: Colors.orange[400],
-                  onTap: () {
+            return
+              GestureDetector(
+                onTap: () {
+                  {
 
                     firestore_instance
                         .collection('course_popularity')
@@ -105,15 +66,121 @@ class _CourseTileState extends State<CourseTile> {
                                   )))
                     });
 
-                  },
-                  onLongPress: () {
-                  },
+                  }
+                },
+                child: Card(
+                elevation: 3,
+                color: Color(0xE6FFFFFF),
+                shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                child: Container(
+                  padding: EdgeInsets.all(10.0),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  child: Row(
+                    children: [TextButton(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
+                      ),
+                      onPressed: (){
+                        setState(() {
+                          widget.favorite = !widget.favorite;
+                          if (widget.favorite) {
+                            favorites.add(widget.course.name);
+                            firestore_instance
+                                .collection("Favorites")
+                                .doc(loggedUser.email)
+                                .set({'liked': favorites});
+                          } else {
+                            favorites.remove(widget.course.name);
+                            firestore_instance
+                                .collection("Favorites")
+                                .doc(loggedUser.email)
+                                .set({'liked': favorites});
+                          }
+                        });
+
+                      },
+                      child: Icon(
+                        widget.favorite ? Icons.favorite : Icons.favorite_border,
+                        color: Colors.red,
+                      ),
+                    ),
+                      Container(
+                        height: 135.0,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Color.fromRGBO(233, 233, 233, 0.0),
+                          ),
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                      ),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Text(
+                        '${widget.course.name}\n',
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              textDirection: TextDirection.rtl,
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 16.0,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 8.0,
+                            ),
+                            Text(
+                                  'מחלקה: ${widget.course.depName}',
+                                  overflow: TextOverflow.ellipsis,
+                                  textDirection: TextDirection.rtl,
+                                  style: TextStyle(
+                                    fontSize: 14.0,
+                                    color: Color.fromRGBO(139, 144, 165, 1),
+                                  ),
+                                ),
+                            SizedBox(
+                              height: 5.0,
+                            ),
+                            Text(
+                              'נק"ז: ${widget.course.credits}',
+                              textDirection: TextDirection.rtl,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                color: Color.fromRGBO(139, 144, 165, 1),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 2.0,
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  'מספר קורס: ${widget.course.courseNumber}',
+                                  overflow: TextOverflow.ellipsis,
+                                  textDirection: TextDirection.rtl,
+                                  style: TextStyle(
+                                    fontSize: 14.0,
+                                    color: Color.fromRGBO(139, 144, 165, 1),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 ),
-              ),
-            );
+              ));
           } else {
             return Loading();
           }
         });
   }
 }
+
