@@ -89,7 +89,7 @@ class _CoursePageState extends State<CoursePage> {
                   height: 10,
                 ),
                 Center(
-                  child: RatingBarIndicator(
+                  child: widget.course_page_rating != -1 ? RatingBarIndicator(
                     rating: widget.course_page_rating,
                     itemBuilder: (context, index) => Icon(
                       Icons.star,
@@ -98,7 +98,11 @@ class _CoursePageState extends State<CoursePage> {
                     itemCount: 5,
                     itemSize: 50.0,
                     direction: Axis.horizontal,
-                  ),
+                  ) : Text('הקורס עוד לא דורג',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold
+                  ),),
                 ),
                 // Text(
                 //   'דירוג: ',

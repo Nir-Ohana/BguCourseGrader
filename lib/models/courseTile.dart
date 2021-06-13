@@ -17,7 +17,7 @@ class CourseTile extends StatefulWidget {
 class _CourseTileState extends State<CourseTile> {
   final loggedUser = FirebaseAuth.instance.currentUser;
   final FirebaseFirestore firestore_instance = FirebaseFirestore.instance;
-  double course_rating = 2.5;
+  double course_rating = -1;
 
   @override
   Widget build(BuildContext context) {
