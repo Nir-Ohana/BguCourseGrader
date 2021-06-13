@@ -298,7 +298,7 @@ class _CoursePageState extends State<CoursePage> {
                                 )));
                   },
                   child: const Text(
-                    "לחץ להשארת ביקורת",
+                    "השארת ביקורת",
                     style: TextStyle(color: Colors.black),
                   ),
                 ),
@@ -311,7 +311,7 @@ class _CoursePageState extends State<CoursePage> {
                                     courseName: widget.course_name,
                                   )));
                     },
-                    child: const Text("לחץ על מנת לראות ביקורות לקורס זה",
+                    child: const Text("ביקורות לקורס זה",
                         style: TextStyle(color: Colors.black))),
               ],
             ),
