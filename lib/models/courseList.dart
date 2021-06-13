@@ -12,7 +12,7 @@ class CoursesList extends StatefulWidget {
   final String courseName;
   final String courseNum;
   final bool hasTest;
-  final double rating;
+
 
   CoursesList(
       {this.filtered,
@@ -20,7 +20,7 @@ class CoursesList extends StatefulWidget {
       this.courseName,
       this.courseNum,
       this.hasTest,
-      this.rating});
+      });
 
   @override
   _CoursesListState createState() => _CoursesListState();
@@ -53,8 +53,8 @@ class _CoursesListState extends State<CoursesList> {
 
   Stream returnFiltered() {
     Query collection = _firestore.collection('courses');
-    List<String> courses_with_rating =
-        []; // saving courses with equal or greater than provided rating to join on courses Table.
+    // List<String> courses_with_rating =
+    //     []; // saving courses with equal or greater than provided rating to join on courses Table.
 
     if (widget.dep != '') {
       collection = collection.where('department_name', isEqualTo: widget.dep);
@@ -72,16 +72,16 @@ class _CoursesListState extends State<CoursesList> {
       collection = collection.where('test_exists', isEqualTo: widget.hasTest);
     }
 
-      _firestore
-          .collection('course_popularity')
-          .where('course_rating', isGreaterThanOrEqualTo: widget.rating)
-          .get()
-          .then((coursePopularitySnapshots) => {
-                for (var snapshot in coursePopularitySnapshots.docs.toList())
-                  {print(DateTime.now().toString()), courses_with_rating.add(snapshot.id),},
-              })
-          .then((_) => collection =
-              collection.where('course_number', whereIn: courses_with_rating));
+      // _firestore
+      //     .collection('course_popularity')
+      //     .where('course_rating', isGreaterThanOrEqualTo: widget.rating)
+      //     .get()
+      //     .then((coursePopularitySnapshots) => {
+      //           for (var snapshot in coursePopularitySnapshots.docs.toList())
+      //             {print(DateTime.now().toString()), courses_with_rating.add(snapshot.id),},
+      //         })
+      //     .then((_) => collection =
+      //         collection.where('course_number', whereIn: courses_with_rating));
 
     print("here " + DateTime.now().toString());
     return collection.snapshots();

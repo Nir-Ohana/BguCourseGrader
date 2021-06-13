@@ -1,7 +1,7 @@
 import 'package:bgu_course_grader/models/inputDec.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+
 
 import 'courses_list.dart';
 
@@ -20,7 +20,7 @@ class _AdvancedSearchState extends State<AdvancedSearch> {
   bool finalExam = false;
   bool assignments = false;
   bool attendance = false;
-  double user_rating = 0;
+  //double user_rating = 0;
 
   final _formKey = GlobalKey<FormState>();
 
@@ -98,23 +98,23 @@ class _AdvancedSearchState extends State<AdvancedSearch> {
                         });
                       },
                     ),
-                    RatingBar.builder(
-                      initialRating: 0,
-                      minRating: 1,
-                      direction: Axis.horizontal,
-                      allowHalfRating: true,
-                      itemCount: 5,
-                      itemSize: 30,
-                      itemPadding: EdgeInsets.symmetric(
-                          horizontal: 4.0),
-                      itemBuilder: (context, _) => Icon(
-                        Icons.star,
-                        color: Colors.amber,
-                      ),
-                      onRatingUpdate: (rating) {
-                        user_rating = rating; // new rating of the user
-                      },
-                    ),
+                    // RatingBar.builder(
+                    //   initialRating: 0,
+                    //   minRating: 1,
+                    //   direction: Axis.horizontal,
+                    //   allowHalfRating: true,
+                    //   itemCount: 5,
+                    //   itemSize: 30,
+                    //   itemPadding: EdgeInsets.symmetric(
+                    //       horizontal: 4.0),
+                    //   itemBuilder: (context, _) => Icon(
+                    //     Icons.star,
+                    //     color: Colors.amber,
+                    //   ),
+                    //   onRatingUpdate: (rating) {
+                    //     user_rating = rating; // new rating of the user
+                    //   },
+                    // ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                       child: ElevatedButton(
@@ -133,7 +133,7 @@ class _AdvancedSearchState extends State<AdvancedSearch> {
                                       courseName: courseName,
                                       finalExam: finalExam,
                                       favorites: false,
-                                      rating: user_rating)));
+                                      )));
                         },
                         child: Text(
                           'חפש',

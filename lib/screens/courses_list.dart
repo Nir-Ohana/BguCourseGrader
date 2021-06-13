@@ -14,12 +14,12 @@ class CourseList extends StatefulWidget {
   final String courseNum;
   final bool finalExam;
   final bool favorites;
-  final double rating;
 
 
 
 
-  CourseList({this.filtered, this.department, this.courseNum, this.courseName, this.finalExam, this.favorites, this.rating});
+
+  CourseList({this.filtered, this.department, this.courseNum, this.courseName, this.finalExam, this.favorites});
 
 
 
@@ -39,7 +39,7 @@ class _CourseListState extends State<CourseList> {
         child: Container(
           child: widget.favorites ? FavoriteList() : CoursesList(filtered: widget.filtered,dep: widget.department,
           courseName: widget.courseName, courseNum: widget.courseNum,
-          hasTest: !widget.finalExam, rating: widget.rating),
+          hasTest: !widget.finalExam),
         ),
       ),
 
