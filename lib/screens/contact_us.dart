@@ -52,6 +52,7 @@ class MyCustomFormState extends State<MyCustomForm> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
+          SizedBox(height: 150,),
           // TextFormField(
           //   validator: (value) {
           //     if (value == null || value.isEmpty) {

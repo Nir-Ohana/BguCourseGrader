@@ -15,15 +15,16 @@ class GoogleSignInProvider extends ChangeNotifier{
       final user = _auth.currentUser;
       if (user != null) {
         loggedInUser = user;
-        if(_firestore.collection("Users").doc(loggedInUser.displayName).get() == null)
-        _firestore
-            .collection("Users").doc(loggedInUser.displayName)
-            .set({
-          'faculty': 'פלוגת איזי',
-          'department' : 'מדעי הדשא',
-          'neighbourhood' : 'שכונה',
-          'year' : 'עתודאי וגאה',
-          'photoURL' : loggedInUser.photoURL});
+        if(_firestore.collection("Users").doc(loggedInUser.displayName).get() == null) {
+          _firestore
+              .collection("Users").doc(loggedInUser.displayName)
+              .set({
+            'faculty': 'פלוגת איזי',
+            'department': 'מדעי הדשא',
+            'neighbourhood': 'שכונה',
+            'year': 'עתודאי וגאה',
+            'photoURL': loggedInUser.photoURL});
+        }
       }
     } catch (e) {
       print(e);
