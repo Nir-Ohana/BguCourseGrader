@@ -70,7 +70,7 @@ class Menu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.orange[100],
+        backgroundColor: Colors.orangeAccent[100],
         body: Directionality(
           textDirection: TextDirection.rtl,
           child: Container(
