@@ -13,24 +13,20 @@ class FavoriteTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return Padding(
-      padding: EdgeInsets.only(top: 8),
-      child: Card(
-        margin: EdgeInsets.fromLTRB(20, 6, 20, 0),
-        child: ListTile(
+    return GestureDetector(
         onTap: () {
-          firestore_instance
-              .collection('course_popularity')
-              .doc(course.courseNumber)
-              .get()
-              .then((snapshot) => {
-            if (snapshot.exists)
-              {
-                course_rating =
-                snapshot.data()['course_rating']
-              }
-          })
-              .then((value) =>
+      firestore_instance
+          .collection('course_popularity')
+          .doc(course.courseNumber)
+          .get()
+          .then((snapshot) => {
+        if (snapshot.exists)
+          {
+            course_rating =
+            snapshot.data()['course_rating']
+          }
+      })
+          .then((value) =>
           Navigator.push(
               context,
               MaterialPageRoute(
@@ -42,22 +38,85 @@ class FavoriteTile extends StatelessWidget {
                         course_summary: course.courseSummary,
                         course_page_rating: course_rating,
                       ))));
-        },
-          title: Text(
-            '${course.name}\n',
-            textDirection: TextDirection.rtl,
+    },
+        child: Card(
+        elevation: 3,
+        color: Color(0xE6FFFFFF),
+    shape:
+    RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+    child:Container(
+      padding: EdgeInsets.all(10.0),
+      decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(20.0)),
+      child: Row(
+        children: [
+        Container(
+        height: 135.0,
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Color.fromRGBO(233, 233, 233, 0.0),
           ),
-          subtitle:
-          Text(
-            'מספר קורס: ${course.courseNumber}',
-            textDirection: TextDirection.rtl,
-          ),
-
-          tileColor: Colors.orange[400],
-
-
+          borderRadius: BorderRadius.circular(20.0),
         ),
       ),
-    );
-  }
-}
+      Expanded(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(
+              '${course.name}\n',
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              textDirection: TextDirection.rtl,
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 16.0,
+              ),
+            ),
+            SizedBox(
+              height: 8.0,
+            ),
+            Text(
+              'מחלקה: ${course.depName}',
+              overflow: TextOverflow.ellipsis,
+              textDirection: TextDirection.rtl,
+              style: TextStyle(
+                fontSize: 14.0,
+                color: Color.fromRGBO(139, 144, 165, 1),
+              ),
+            ),
+            SizedBox(
+              height: 5.0,
+            ),
+            Text(
+              'נק"ז: ${course.credits}',
+              textDirection: TextDirection.rtl,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                color: Color.fromRGBO(139, 144, 165, 1),
+              ),
+            ),
+            SizedBox(
+              height: 2.0,
+            ),
+            Row(
+              children: [
+                Text(
+                  'מספר קורס: ${course.courseNumber}',
+                  overflow: TextOverflow.ellipsis,
+                  textDirection: TextDirection.rtl,
+                  style: TextStyle(
+                    fontSize: 14.0,
+                    color: Color.fromRGBO(139, 144, 165, 1),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),]),),),);}}
+
+
+
+
