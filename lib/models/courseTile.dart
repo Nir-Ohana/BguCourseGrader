@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:bgu_course_grader/models/course.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 
 class CourseTile extends StatefulWidget {
   final Course course;
@@ -79,34 +79,7 @@ class _CourseTileState extends State<CourseTile> {
                     borderRadius: BorderRadius.circular(20.0),
                   ),
                   child: Row(
-                    children: [TextButton(
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
-                      ),
-                      onPressed: (){
-                        setState(() {
-                          widget.favorite = !widget.favorite;
-                          if (widget.favorite) {
-                            favorites.add(widget.course.name);
-                            firestore_instance
-                                .collection("Favorites")
-                                .doc(loggedUser.email)
-                                .set({'liked': favorites});
-                          } else {
-                            favorites.remove(widget.course.name);
-                            firestore_instance
-                                .collection("Favorites")
-                                .doc(loggedUser.email)
-                                .set({'liked': favorites});
-                          }
-                        });
-
-                      },
-                      child: Icon(
-                        widget.favorite ? Icons.favorite : Icons.favorite_border,
-                        color: Colors.red,
-                      ),
-                    ),
+                    children: [
                       Container(
                         height: 135.0,
                         decoration: BoxDecoration(
@@ -172,7 +145,35 @@ class _CourseTileState extends State<CourseTile> {
                             ),
                           ],
                         ),
-                      )
+                      ),
+                      TextButton(
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
+                        ),
+                        onPressed: (){
+                          setState(() {
+                            widget.favorite = !widget.favorite;
+                            if (widget.favorite) {
+                              favorites.add(widget.course.name);
+                              firestore_instance
+                                  .collection("Favorites")
+                                  .doc(loggedUser.email)
+                                  .set({'liked': favorites});
+                            } else {
+                              favorites.remove(widget.course.name);
+                              firestore_instance
+                                  .collection("Favorites")
+                                  .doc(loggedUser.email)
+                                  .set({'liked': favorites});
+                            }
+                          });
+
+                        },
+                        child: Icon(
+                          widget.favorite ? Icons.favorite : Icons.favorite_border,
+                          color: Colors.red,
+                        ),
+                      ),
                     ],
                   ),
                 ),

@@ -5,7 +5,7 @@ import 'course.dart';
 
 class FavoriteTile extends StatelessWidget {
   final Course course;
-  double course_rating = 2.5;
+  double course_rating = -1;
   final FirebaseFirestore firestore_instance = FirebaseFirestore.instance;
   FavoriteTile({this.course});
 
