@@ -78,17 +78,7 @@ class _SettingsPageState extends State<SettingsMenu> {
             SizedBox(
               height: 50,
             ),
-            Center(
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(padding: EdgeInsets.symmetric(horizontal: 40), primary: Colors.orangeAccent[200],
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20)),),
-                onPressed: () {},
-                child: Text("SIGN OUT",
-                    style: TextStyle(
-                        fontSize: 16, letterSpacing: 2.2, color: Colors.white)),
-              ),
-            )
+
           ],
         ),
       ),
