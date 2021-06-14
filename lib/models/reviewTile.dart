@@ -29,7 +29,7 @@ class ReviewTile extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             ListTile(
-              onLongPress: () {
+              onTap: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => Profile(userName)));
               },
