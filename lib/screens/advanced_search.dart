@@ -36,7 +36,7 @@ class _AdvancedSearchState extends State<AdvancedSearch> {
       },
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.orange[100],
+        backgroundColor: Colors.orangeAccent[100],
         body: Container(
           padding: EdgeInsets.symmetric(vertical: 50, horizontal: 50),
           child: Directionality(

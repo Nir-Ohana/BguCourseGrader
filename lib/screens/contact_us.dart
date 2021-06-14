@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 
-import 'menu/menu_screen.dart';
+
 
 class ContactUs extends StatelessWidget {
   // This widget is the root of your application.
@@ -103,7 +103,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                     // If the form is valid, display a snackbar. In the real world,
                     // you'd often call a server or save the information in a database.
                     ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content:  Text('מאבד את הנתונים...', textDirection:TextDirection.rtl,)));
+                        SnackBar(content:  Text('מעבד את הנתונים...', textDirection:TextDirection.rtl,)));
                     firestore_instance
                         .collection("ContactUs").doc(user.displayName + ' ' + DateTime.now().toString())
                         .set({
