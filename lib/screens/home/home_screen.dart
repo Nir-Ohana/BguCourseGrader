@@ -266,7 +266,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     fontSize: 12.0,
                                                     color: Colors.grey[400],
                                                   ),),
-                                                Text(fields[0]!=null? fields[0].toString() : 'פלוגת איזי',
+                                                Text(fields.length != 0 ? fields[0].toString() : 'פלוגת איזי',
                                                   style: TextStyle(
                                                     fontSize: 15.0,
                                                   ),)
@@ -296,7 +296,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     color: Colors.grey[400],
                                                   ),),
                                                 Text(
-                                                  fields[1]!=null? fields[1].toString() : 'מדעי הדשא',
+                                                  fields.length != 0? fields[1].toString() : 'מדעי הדשא',
                                                   style: TextStyle(
                                                     fontSize: 15.0,
                                                   ),)
@@ -325,7 +325,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     fontSize: 12.0,
                                                     color: Colors.grey[400],
                                                   ),),
-                                                Text(fields[2]!=null? fields[2].toString() : 'הומלס לבינתיים',
+                                                Text(fields.length != 0? fields[2].toString() : 'הומלס לבינתיים',
                                                   style: TextStyle(
                                                     fontSize: 15.0,
                                                   ),)
@@ -354,7 +354,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     fontSize: 12.0,
                                                     color: Colors.grey[400],
                                                   ),),
-                                                Text(fields[3]!=null? fields[3].toString() : 'WHAT YEAR IS THIS?!',
+                                                Text(fields.length != 0? fields[3].toString() : 'WHAT YEAR IS THIS?!',
                                                   style: TextStyle(
                                                     fontSize: 15.0,
                                                   ),)
